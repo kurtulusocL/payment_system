@@ -1,0 +1,335 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "All Audit Logs (Admin)";
+    Layout = "_AdminLayout";
+}
+
+<div class="audit-admin-page">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1><i class="fas fa-shield-alt"></i> All Audit Logs (Admin View)</h1>
+        <p>Complete audit trail with all records (active, inactive, deleted)</p>
+    </div>
+
+    <!-- Filter Links -->
+    <div class="filter-links mb-3">
+        <a asp-controller="Audit" asp-action="GetAllAudits" class="btn btn-outline-secondary">
+            <i class="fas fa-filter"></i> Active Only
+        </a>
+        <a asp-controller="Audit" asp-action="GetAllAuditsForAdmin" class="btn btn-primary active-filter">
+            <i class="fas fa-list"></i> All Records (Admin)
+        </a>
+    </div>
+
+    <!-- Bulk Actions Bar -->
+    <div class="bulk-actions-bar card mb-3">
+        <div class="card-body">
+            <div class="flex-between">
+                <div class="bulk-actions-left">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll()" />
+                        <span class="checkmark"></span>
+                        Select All
+                    </label>
+                    <span id="selectedCount" class="selected-count">0 items selected</span>
+                </div>
+                <div class="bulk-actions-right">
+                    <button type="button" class="btn btn-danger" id="bulkDeleteBtn" onclick="bulkDelete()" disabled>
+                        <i class="fas fa-trash-alt"></i> Delete Selected
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Form for Bulk Delete -->
+    <form id="bulkDeleteForm" asp-controller="Audit" asp-action="DeleteAuditsById" method="post" style="display:none;">
+        <input type="hidden" id="bulkDeleteIds" name="ids" value="" />
+    </form>
+
+    <!-- Data Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-list-alt"></i> All Audit Records</h3>
+        </div>
+        <div class="card-body">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>No audit records found</p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="data-table" id="audit-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="headerCheckbox" onclick="toggleSelectAll()" /></th>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Area Accessed</th>
+                                <th>IP Address</th>
+                                <th>Date</th>
+                                <th>Active</th>
+                                <th>Deleted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th><input type="text" class="column-search" placeholder="Search user..." /></th>
+                                <th><input type="text" class="column-search" placeholder="Search action..." /></th>
+                                <th><input type="text" class="column-search" placeholder="Search area..." /></th>
+                                <th><input type="text" class="column-search" placeholder="Search IP..." /></th>
+                                <th></th>
+                                <th><select class="column-search">
+                                    <option value="">All</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select></th>
+                                <th><select class="column-search">
+                                    <option value="">All</option>
+                                    <option value="Deleted">Deleted</option>
+                                    <option value="Not Deleted">Not Deleted</option>
+                                </select></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 1;
+                            }
+                            @foreach (var audit in Model)
+                            {
+                                <tr class="@(audit.IsDeleted == true ? "row-deleted" : "")">
+                                    <td>
+                                        <input type="checkbox" class="row-checkbox" data-id="@audit.Id" onclick="updateSelectedCount()" />
+                                    </td>
+                                    <td>@i</td>
+                                    <td>
+                                        <a asp-controller="Audit" asp-action="GetAllAuditsByUserId" asp-route-userId="@audit.UserId" class="user-link">
+                                            @audit.UserEmail
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>
+                                    </td>
+                                    <td><span class="badge badge-info">@audit.Action</span></td>
+                                    <td>@audit.AreaAccessed</td>
+                                    <td><code>@audit.IpAddress</code></td>
+                                    <td>@audit.CreatedDate?.ToString("dd MMM yyyy HH:mm")</td>
+                                    <td>
+                                        @if (audit.IsActive == true)
+                                        {
+                                            <span class="status-badge status-active">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge status-inactive">Inactive</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (audit.IsDeleted == true)
+                                        {
+                                            <span class="status-badge status-deleted">Deleted</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge status-active">Not Deleted</span>
+                                        }
+                                    </td>
+                                    <td class="actions-cell">
+                                        <!-- View Details -->
+                                        <a asp-controller="Audit" asp-action="GetAuditById" asp-route-id="@audit.Id" class="btn btn-sm btn-info" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        @if (audit.IsActive == false)
+                                        {
+                                            <!-- Set Active -->
+                                            <form asp-controller="Audit" asp-action="SetActive" asp-route-id="@audit.Id" method="post" class="inline-form">
+                                                <button type="submit" class="btn btn-sm btn-success" title="Set Active" onclick="return confirm('Set this audit as active?')">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <!-- Set Inactive -->
+                                            <form asp-controller="Audit" asp-action="SetInactive" asp-route-id="@audit.Id" method="post" class="inline-form">
+                                                <button type="submit" class="btn btn-sm btn-warning" title="Set Inactive" onclick="return confirm('Set this audit as inactive?')">
+                                                    <i class="fas fa-ban"></i>
+                                                </button>
+                                            </form>
+                                        }
+
+                                        @if (audit.IsDeleted == false)
+                                        {
+                                            <!-- Soft Delete -->
+                                            <form asp-controller="Audit" asp-action="SoftDelete" asp-route-id="@audit.Id" method="post" class="inline-form">
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Soft Delete" onclick="return confirm('Soft delete this audit?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <!-- Restore -->
+                                            <form asp-controller="Audit" asp-action="Restore" asp-route-id="@audit.Id" method="post" class="inline-form">
+                                                <button type="submit" class="btn btn-sm btn-primary" title="Restore" onclick="return confirm('Restore this audit?')">
+                                                    <i class="fas fa-undo"></i>
+                                                </button>
+                                            </form>
+                                        }
+
+                                        <!-- Hard Delete (Only visible in Admin view) -->
+                                        <form asp-controller="Audit" asp-action="Delete" asp-route-id="@audit.Id" method="post" class="inline-form">
+                                            <button type="submit" class="btn btn-sm btn-dark" title="Hard Delete (Permanent)" onclick="return confirm('PERMANENTLY delete this audit? This cannot be undone!')">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $('#audit-table').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"
+                },
+                "pageLength": 50,
+                "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
+                "order": [[6, 'desc']],
+                "columnDefs": [
+                    { "orderable": false, "targets": [0, 9] }
+                ],
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">'
+            });
+
+            // Column filtering
+            table.columns().every(function() {
+                var that = this;
+                var columnIndex = this.index();
+                
+                // Only apply filters to columns 2,3,4,5,7,8 (User, Action, Area, IP, Active, Deleted)
+                if ([2, 3, 4, 5, 7, 8].includes(columnIndex)) {
+                    $('.column-search').eq(this.index()).on('keyup change', function() {
+                        if (that.search() !== this.value) {
+                            that.search(this.value, false, true).draw();
+                        }
+                    });
+                }
+            });
+
+            // Update selected count on checkbox change
+            $('#audit-table').on('change', '.row-checkbox', function() {
+                updateSelectedCount();
+            });
+
+            // Update selected count on header checkbox change
+            $('#audit-table').on('change', '#headerCheckbox', function() {
+                updateSelectedCount();
+            });
+
+            // Global select all
+            $('#selectAllCheckbox').on('change', function() {
+                var isChecked = $(this).is(':checked');
+                $('#audit-table').find('.row-checkbox').prop('checked', isChecked);
+                $('#headerCheckbox').prop('checked', isChecked);
+                updateSelectedCount();
+            });
+
+            console.log('Audit Admin DataTable with Column Filters Initialized');
+        });
+
+        /**
+         * Toggle select all checkboxes
+         */
+        function toggleSelectAll() {
+            var headerCheckbox = document.getElementById('headerCheckbox');
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            var rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            
+            var isChecked = headerCheckbox.checked || selectAllCheckbox.checked;
+            
+            headerCheckbox.checked = isChecked;
+            selectAllCheckbox.checked = isChecked;
+            
+            rowCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = isChecked;
+            });
+            
+            updateSelectedCount();
+        }
+
+        /**
+         * Update selected count and enable/disable bulk delete button
+         */
+        function updateSelectedCount() {
+            var rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            var selectedCount = Array.from(rowCheckboxes).filter(function(cb) { return cb.checked; }).length;
+            
+            document.getElementById('selectedCount').textContent = selectedCount + ' item(s) selected';
+            
+            var bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+            bulkDeleteBtn.disabled = selectedCount === 0;
+            
+            // Update header checkbox state
+            var headerCheckbox = document.getElementById('headerCheckbox');
+            var selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            headerCheckbox.checked = selectedCount === rowCheckboxes.length;
+            selectAllCheckbox.checked = selectedCount === rowCheckboxes.length;
+        }
+
+        /**
+         * Bulk delete selected audits
+         */
+        function bulkDelete() {
+            var rowCheckboxes = document.querySelectorAll('.row-checkbox:checked');
+            var ids = Array.from(rowCheckboxes).map(function(cb) { return cb.dataset.id; });
+            
+            if (ids.length === 0) {
+                alert('No items selected');
+                return;
+            }
+            
+            if (!confirm('Are you sure you want to PERMANENTLY delete ' + ids.length + ' audit record(s)? This cannot be undone!')) {
+                return;
+            }
+            
+            // Set the IDs in the hidden input
+            var bulkDeleteForm = document.getElementById('bulkDeleteForm');
+            var bulkDeleteIds = document.getElementById('bulkDeleteIds');
+            
+            // Clear existing hidden inputs
+            bulkDeleteForm.querySelectorAll('input[name="ids"]').forEach(function(input) {
+                input.remove();
+            });
+            
+            // Add new hidden inputs for each ID
+            ids.forEach(function(id) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'ids';
+                input.value = id;
+                bulkDeleteForm.appendChild(input);
+            });
+            
+            // Submit the form
+            bulkDeleteForm.submit();
+        }
+    </script>
+}

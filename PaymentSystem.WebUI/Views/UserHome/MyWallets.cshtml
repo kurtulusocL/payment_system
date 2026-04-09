@@ -1,0 +1,74 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "My Wallets";
+    Layout = "_Layout";
+    var signalRHubUrl = ViewBag.SignalRHubUrl as string;
+}
+<div class="container py-4">
+    <div class="page-header mb-4 d-flex justify-content-between align-items-center">
+        <div><h1><i class="fas fa-wallet"></i> My Wallets</h1><p>Manage your wallet accounts</p></div>
+        <div><a asp-controller="UserHome" asp-action="CreateWallet" class="btn btn-primary"><i class="fas fa-plus"></i> New Wallet</a></div>
+    </div>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="empty-state text-center py-5"><i class="fas fa-wallet fa-4x text-muted mb-3"></i><h4>No wallets found</h4><p class="text-muted">You don't have any wallets yet. <a asp-controller="UserHome" asp-action="CreateWallet">Create one now!</a></p></div>
+    }
+    else
+    {
+        <!-- Bulk Actions Bar -->
+        <div class="bulk-actions-bar card mb-3">
+            <div class="card-body"><div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2">
+                    <input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll()" /> <label for="selectAllCheckbox">Select All</label>
+                    <span id="selectedCount" class="text-muted">0 selected</span>
+                </div>
+                <div><button type="button" class="btn btn-danger btn-sm" id="bulkDeleteBtn" onclick="bulkDelete()" disabled><i class="fas fa-trash-alt"></i> Delete Selected</button></div>
+            </div></div>
+        </div>
+        <form id="bulkDeleteForm" asp-controller="UserHome" asp-action="BulkDeleteWallets" method="post" style="display:none;"></form>
+
+        <div class="wallet-grid">
+            @foreach (var wallet in Model)
+            {
+                <div class="wallet-card-lg" data-wallet-id="@wallet.Id">
+                    <div class="d-flex align-items-start">
+                        <input type="checkbox" class="row-checkbox me-2" data-id="@wallet.Id" onclick="updateSelectedCount()" />
+                        <div class="flex-grow-1">
+                            <div class="wallet-header"><h5>@wallet.CurrencyName</h5><span class="badge bg-success">Active</span></div>
+                            <div class="wallet-balance-lg">$@wallet.Balance</div>
+                        </div>
+                    </div>
+                    <div class="wallet-footer-lg d-flex gap-2">
+                        <a asp-controller="UserHome" asp-action="EditWallet" asp-route-id="@wallet.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Edit</a>
+                        <form asp-controller="UserHome" asp-action="SoftDeleteWallet" asp-route-id="@wallet.Id" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this wallet?')"><i class="fas fa-trash"></i></button></form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function toggleSelectAll(){var v=document.getElementById('selectAllCheckbox').checked;document.querySelectorAll('.row-checkbox').forEach(c=>{c.checked=v;});updateSelectedCount();}
+        function updateSelectedCount(){var s=Array.from(document.querySelectorAll('.row-checkbox')).filter(c=>c.checked).length;document.getElementById('selectedCount').textContent=s+' selected';document.getElementById('bulkDeleteBtn').disabled=s===0;}
+        function bulkDelete(){var ids=Array.from(document.querySelectorAll('.row-checkbox:checked')).map(c=>c.dataset.id);if(ids.length===0){alert('No items selected');return;}if(!confirm('Delete '+ids.length+' wallets?'))return;var f=document.getElementById('bulkDeleteForm');f.querySelectorAll('input[name="ids"]').forEach(i=>i.remove());ids.forEach(id=>{var i=document.createElement('input');i.type='hidden';i.name='ids';i.value=id;f.appendChild(i);});f.submit();}
+        @if (!string.IsNullOrEmpty(signalRHubUrl)) {
+            <text>
+            const handler = new window.WalletSignalRHandler("@signalRHubUrl", {
+                onBalanceChanged: function(walletId, balanceData) {
+                    const card = document.querySelector(`[data-wallet-id="${walletId}"] .wallet-balance-lg`);
+                    if (card) { card.textContent = '$' + balanceData.balance.toFixed(2); card.classList.add('balance-updated'); setTimeout(() => card.classList.remove('balance-updated'), 2000); }
+                },
+                onTransactionCompleted: function(walletId, data) { showUserToast('Transaction completed!', 'success'); },
+                onWalletUpdate: function(data) { showUserToast(data.message || 'Wallet updated', 'info'); }
+            });
+            handler.initialize().then(() => {
+                const ids = Array.from(document.querySelectorAll('[data-wallet-id]')).map(el => el.dataset.walletId);
+                ids.forEach(id => handler.joinWalletGroup(id));
+            }).catch(err => console.error('[WalletHub] Failed:', err));
+            </text>
+        }
+    </script>
+}

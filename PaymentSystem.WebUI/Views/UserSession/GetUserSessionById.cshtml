@@ -1,0 +1,36 @@
+@model dynamic
+@{
+    ViewData["Title"] = "User Session Detail";
+    Layout = "_AdminLayout";
+}
+<div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-file-alt"></i> User Session Detail</h1><p>ID: <strong>@Model?.Id</strong></p></div><a asp-controller="UserSession" asp-action="GetAllUserSessions" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a></div></div>
+@if (Model == null) { <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i><strong>Not found!</strong></div> }
+else {
+    <div class="card mb-3"><div class="card-header"><h3><i class="fas fa-info-circle"></i> Session Information</h3></div><div class="card-body"><div class="detail-grid">
+        <div class="detail-row"><div class="detail-label">ID:</div><div class="detail-value">@Model.Id</div></div>
+        <div class="detail-row"><div class="detail-label">Username:</div><div class="detail-value"><strong>@Model.Username</strong></div></div>
+        <div class="detail-row"><div class="detail-label">Login Date:</div><div class="detail-value">@Model.LoginDate?.ToString("dd MMM yyyy, HH:mm:ss")</div></div>
+        <div class="detail-row"><div class="detail-label">Logout Date:</div><div class="detail-value">@(Model.LogoutDate?.ToString("dd MMM yyyy, HH:mm:ss") ?? "Still Online")</div></div>
+        <div class="detail-row"><div class="detail-label">Duration (minutes):</div><div class="detail-value">@Model.OnlineDurationTime</div></div>
+        <div class="detail-row"><div class="detail-label">IP Address:</div><div class="detail-value"><code>@Model.IpAddress</code></div></div>
+    </div></div></div>
+    <div class="card mb-3"><div class="card-header"><h3><i class="fas fa-user"></i> User Information</h3></div><div class="card-body"><div class="detail-grid">
+        @if (Model.User != null) {
+            <div class="detail-row"><div class="detail-label">User ID:</div><div class="detail-value">@Model.AppUserId</div></div>
+            <div class="detail-row"><div class="detail-label">Name:</div><div class="detail-value">@Model.User.NameSurname</div></div>
+            <div class="detail-row"><div class="detail-label">Email:</div><div class="detail-value">@Model.User.Email</div></div>
+            <div class="detail-row"><div class="detail-label">Phone:</div><div class="detail-value">@Model.User.PhoneNumber</div></div>
+        }
+    </div></div></div>
+    <div class="card mb-3"><div class="card-header"><h3><i class="fas fa-toggle-on"></i> Status</h3></div><div class="card-body"><div class="detail-grid">
+        <div class="detail-row"><div class="detail-label">Active:</div><div class="detail-value">@(Model.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</div></div>
+        <div class="detail-row"><div class="detail-label">Deleted:</div><div class="detail-value">@(Model.IsDeleted == true ? "<span class='status-badge status-deleted'>Deleted</span>" : "No")</div></div>
+    </div></div></div>
+    <div class="card"><div class="card-header"><h3><i class="fas fa-cogs"></i> Actions</h3></div><div class="card-body"><div class="action-buttons">
+        @if (Model.IsActive == false) { <form asp-controller="UserSession" asp-action="SetActive" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i> Set Active</button></form> }
+        else { <form asp-controller="UserSession" asp-action="SetInactive" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i> Set Inactive</button></form> }
+        @if (Model.IsDeleted == false) { <form asp-controller="UserSession" asp-action="SoftDelete" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i> Soft Delete</button></form> }
+        else { <form asp-controller="UserSession" asp-action="Restore" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i> Restore</button></form> }
+        <form asp-controller="UserSession" asp-action="DeleteUserSession" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-dark" onclick="return confirm('PERMANENTLY delete?')"><i class="fas fa-exclamation-triangle"></i> Hard Delete</button></form>
+    </div></div></div>
+}

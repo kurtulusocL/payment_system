@@ -1,0 +1,115 @@
+@model UserDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
+}
+
+<div class="user-dashboard-page">
+    <div class="welcome-banner">
+        <div class="container">
+            <h1><i class="fas fa-hand-wave"></i> Welcome back!</h1>
+            <p>Manage your finances, track payments, and view transactions all in one place.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card stat-card-primary">
+                <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+                <div class="stat-content"><h3>@Model.Wallets.Count</h3><p>My Wallets</p><a asp-controller="UserHome" asp-action="MyWallets" class="stat-link">View Wallets <i class="fas fa-arrow-right"></i></a></div>
+            </div>
+            <div class="stat-card stat-card-success">
+                <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                <div class="stat-content"><h3>@Model.Payments.Count</h3><p>My Payments</p><a asp-controller="UserHome" asp-action="MyPayments" class="stat-link">View Payments <i class="fas fa-arrow-right"></i></a></div>
+            </div>
+            <div class="stat-card stat-card-info">
+                <div class="stat-icon"><i class="fas fa-exchange-alt"></i></div>
+                <div class="stat-content"><h3>Active</h3><p>Transactions</p><a asp-controller="UserHome" asp-action="MyTransactions" class="stat-link">View Transactions <i class="fas fa-arrow-right"></i></a></div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header"><h3><i class="fas fa-bolt"></i> Quick Actions</h3></div>
+            <div class="card-body">
+                <div class="quick-actions">
+                    <a asp-controller="UserHome" asp-action="CreateWallet" class="btn btn-primary"><i class="fas fa-plus"></i> New Wallet</a>
+                    <a asp-controller="UserHome" asp-action="CreatePayment" class="btn btn-success"><i class="fas fa-plus"></i> New Payment</a>
+                    <a asp-controller="UserHome" asp-action="CreateTransaction" class="btn btn-info"><i class="fas fa-plus"></i> New Transaction</a>
+                    <a asp-controller="Account" asp-action="Profile" class="btn btn-secondary"><i class="fas fa-user"></i> My Profile</a>
+                </div>
+            </div>
+        </div>
+
+        @if (Model.Wallets != null && Model.Wallets.Count > 0)
+        {
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center"><h3><i class="fas fa-wallet"></i> My Wallets</h3><a asp-controller="UserHome" asp-action="MyWallets" class="btn btn-sm btn-primary">View All</a></div>
+                <div class="card-body">
+                    <div class="wallet-preview-grid">
+                        @foreach (var wallet in Model.Wallets.Take(3))
+                        {
+                            <div class="wallet-card" data-wallet-id="@wallet.Id">
+                                <div class="wallet-header"><span class="wallet-currency">@wallet.CurrencyName</span><span class="badge bg-success">Active</span></div>
+                                <div class="wallet-balance">$@wallet.Balance</div>
+                                <div class="wallet-footer"><a asp-controller="UserHome" asp-action="EditWallet" asp-route-id="@wallet.Id" class="btn btn-sm btn-outline-primary">Edit</a></div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (Model.Payments != null && Model.Payments.Count > 0)
+        {
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center"><h3><i class="fas fa-credit-card"></i> Recent Payments</h3><a asp-controller="UserHome" asp-action="MyPayments" class="btn btn-sm btn-primary">View All</a></div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light"><tr><th>#</th><th>Amount</th><th>Card</th><th>Merchant</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                @{ int i = 1; }
+                                @foreach (var payment in Model.Payments.Take(5))
+                                {
+                                    <tr><td>@i</td><td><strong>$@payment.Amount</strong></td><td><code>@payment.MaskedCardNumber</code></td><td>@payment.MerchantName</td><td><a asp-controller="UserHome" asp-action="EditPayment" asp-route-id="@payment.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a></td></tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if ((Model.Wallets == null || Model.Wallets.Count == 0) && (Model.Payments == null || Model.Payments.Count == 0))
+        {
+            <div class="empty-state text-center py-5"><i class="fas fa-inbox fa-4x text-muted mb-3"></i><h4>No data yet</h4><p class="text-muted">You don't have any wallets or payments yet. Get started by exploring our services!</p></div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const hubUrl = "@Model.SignalRHubUrl";
+        if (hubUrl) {
+            const walletHandler = new window.WalletSignalRHandler(hubUrl, {
+                onBalanceChanged: function(walletId, balanceData) {
+                    const card = document.querySelector(`[data-wallet-id="${walletId}"] .wallet-balance`);
+                    if (card) { card.textContent = '$' + balanceData.balance.toFixed(2); card.classList.add('balance-updated'); setTimeout(() => card.classList.remove('balance-updated'), 2000); }
+                },
+                onTransactionCompleted: function(walletId, data) { showUserToast('Transaction completed!', 'success'); },
+                onWalletUpdate: function(data) { showUserToast(data.message || 'Wallet updated', 'info'); }
+            });
+            walletHandler.initialize().then(() => {
+                const walletIds = Array.from(document.querySelectorAll('[data-wallet-id]')).map(el => el.dataset.walletId);
+                walletIds.forEach(id => walletHandler.joinWalletGroup(id));
+            }).catch(err => console.error('[WalletHub] Failed:', err));
+
+            const paymentHandler = new window.PaymentSignalRHandler(hubUrl, {
+                onPaymentStatusChanged: function(paymentId, data) { showUserToast('Payment status changed', 'info'); },
+                onPaymentUpdate: function(data) { showUserToast(data.message || 'Payment updated', 'info'); }
+            });
+            paymentHandler.initialize().catch(err => console.error('[PaymentHub] Failed:', err));
+        }
+    </script>
+}

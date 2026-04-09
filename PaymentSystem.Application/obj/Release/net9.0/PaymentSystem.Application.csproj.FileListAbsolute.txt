@@ -1,0 +1,17 @@
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Application.deps.json
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Application.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Application.pdb
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Domain.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Shared.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Domain.pdb
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\bin\Release\net9.0\PaymentSystem.Shared.pdb
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.csproj.AssemblyReference.cache
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.AssemblyInfoInputs.cache
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.AssemblyInfo.cs
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.csproj.CoreCompileInputs.cache
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentS.0E160526.Up2Date
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\refint\PaymentSystem.Application.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\PaymentSystem.Application.pdb
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Application\obj\Release\net9.0\ref\PaymentSystem.Application.dll

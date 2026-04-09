@@ -1,0 +1,77 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Exception Logs";
+    Layout = "_AdminLayout";
+}
+<div class="exception-list-page">
+    <div class="page-header"><div><h1><i class="fas fa-bug"></i> Exception Logs</h1><p>Active exception log records</p></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="ExceptionLogger" asp-action="GetAllExceptions" class="btn btn-primary active-filter"><i class="fas fa-filter"></i> Active</a>
+        <a asp-controller="ExceptionLogger" asp-action="GetAllExceptionsForAdmin" class="btn btn-outline-secondary"><i class="fas fa-list"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="empty-state"><i class="fas fa-inbox"></i><p>No exception logs found</p></div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="data-table" id="exception-table">
+                    <thead><tr><th>#</th><th>Exception Message</th><th>Controller</th><th>IP Address</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr>
+                        <th></th>
+                        <th><input type="text" class="column-search" placeholder="Search message..." /></th>
+                        <th><input type="text" class="column-search" placeholder="Search controller..." /></th>
+                        <th><input type="text" class="column-search" placeholder="Search IP..." /></th>
+                        <th></th>
+                        <th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th>
+                        <th></th>
+                    </tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var ex in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td><small>@ex.ExceptionMessage</small></td>
+                                <td><code>@ex.ControllerName</code></td>
+                                <td><code>@ex.IpAddress</code></td>
+                                <td>@ex.CreatedDate?.ToString("dd MMM yyyy HH:mm")</td>
+                                <td>@(ex.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                                <td class="actions-cell">
+                                    <a asp-controller="ExceptionLogger" asp-action="GetExceptionById" asp-route-id="@ex.Id" class="btn btn-sm btn-info" title="Details"><i class="fas fa-eye"></i></a>
+                                    @if (ex.IsActive == false) { <form asp-controller="ExceptionLogger" asp-action="SetActive" asp-route-id="@ex.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form> }
+                                    else { <form asp-controller="ExceptionLogger" asp-action="SetInactive" asp-route-id="@ex.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i></button></form> }
+                                    @if (ex.IsDeleted == false) { <form asp-controller="ExceptionLogger" asp-action="SoftDelete" asp-route-id="@ex.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form> }
+                                    else { <form asp-controller="ExceptionLogger" asp-action="Restore" asp-route-id="@ex.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form> }
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $('#exception-table').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json" },
+                "pageLength": 50, "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
+                "order": [[4, 'desc']], "columnDefs": [{ "orderable": false, "targets": [6] }],
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">'
+            });
+            table.columns().every(function() {
+                var that = this;
+                if ([1, 2, 3, 5].includes(this.index())) {
+                    $('.column-search').eq(this.index()).on('keyup change', function() {
+                        if (that.search() !== this.value) { that.search(this.value, false, true).draw(); }
+                    });
+                }
+            });
+        });
+    </script>
+}

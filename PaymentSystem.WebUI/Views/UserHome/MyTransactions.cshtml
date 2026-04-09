@@ -1,0 +1,75 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "My Transactions";
+    Layout = "_Layout";
+    var signalRHubUrl = ViewBag.SignalRHubUrl as string;
+}
+<div class="container py-4">
+    <div class="page-header mb-4 d-flex justify-content-between align-items-center">
+        <div><h1><i class="fas fa-exchange-alt"></i> My Transactions</h1><p>View your transaction history</p></div>
+        <div><a asp-controller="UserHome" asp-action="CreateTransaction" class="btn btn-primary"><i class="fas fa-plus"></i> New Transaction</a></div>
+    </div>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="empty-state text-center py-5"><i class="fas fa-exchange-alt fa-4x text-muted mb-3"></i><h4>No transactions found</h4><p class="text-muted">You don't have any transactions yet.</p></div>
+    }
+    else
+    {
+        <!-- Bulk Actions Bar -->
+        <div class="bulk-actions-bar card mb-3">
+            <div class="card-body"><div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-2"><input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll()" /> <label>Select All</label><span id="selectedCount" class="text-muted">0 selected</span></div>
+                <div><button type="button" class="btn btn-danger btn-sm" id="bulkDeleteBtn" onclick="bulkDelete()" disabled><i class="fas fa-trash-alt"></i> Delete Selected</button></div>
+            </div></div>
+        </div>
+        <form id="bulkDeleteForm" asp-controller="UserHome" asp-action="BulkDeleteTransactions" method="post" style="display:none;"></form>
+
+        <div class="card"><div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light"><tr><th><input type="checkbox" id="headerCheckbox" onclick="toggleSelectAll()" /></th><th>#</th><th>Amount</th><th>Reference</th><th>Type</th><th>Date</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var t in Model)
+                        {
+                            <tr data-transaction-id="@t.Id">
+                                <td><input type="checkbox" class="row-checkbox" data-id="@t.Id" onclick="updateSelectedCount()" /></td>
+                                <td>@i</td><td><strong>$@t.Amount</strong></td><td><code>@t.Reference</code></td><td>@t.TransactionTypeName</td><td>@t.CreatedDate?.ToString("dd MMM yyyy")</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <a asp-controller="UserHome" asp-action="EditTransaction" asp-route-id="@t.Id" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i></a>
+                                        <form asp-controller="UserHome" asp-action="SoftDeleteTransaction" asp-route-id="@t.Id" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete?')"><i class="fas fa-trash"></i></button></form>
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div></div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function toggleSelectAll(){var v=document.getElementById('selectAllCheckbox').checked||document.getElementById('headerCheckbox').checked;document.getElementById('selectAllCheckbox').checked=v;document.getElementById('headerCheckbox').checked=v;document.querySelectorAll('.row-checkbox').forEach(c=>{c.checked=v;});updateSelectedCount();}
+        function updateSelectedCount(){var s=Array.from(document.querySelectorAll('.row-checkbox')).filter(c=>c.checked).length;document.getElementById('selectedCount').textContent=s+' selected';document.getElementById('bulkDeleteBtn').disabled=s===0;}
+        function bulkDelete(){var ids=Array.from(document.querySelectorAll('.row-checkbox:checked')).map(c=>c.dataset.id);if(ids.length===0){alert('No items selected');return;}if(!confirm('Delete '+ids.length+' transactions?'))return;var f=document.getElementById('bulkDeleteForm');f.querySelectorAll('input[name="ids"]').forEach(i=>i.remove());ids.forEach(id=>{var i=document.createElement('input');i.type='hidden';i.name='ids';i.value=id;f.appendChild(i);});f.submit();}
+        @if (!string.IsNullOrEmpty(signalRHubUrl)) {
+            <text>
+            const handler = new window.TransactionSignalRHandler("@signalRHubUrl", {
+                onTransactionStatusChanged: function(transactionId, data) { const row = document.querySelector(`[data-transaction-id="${transactionId}"]`); if (row) { row.classList.add('highlight-row'); setTimeout(() => row.classList.remove('highlight-row'), 2000); } },
+                onTransactionCompleted: function(transactionId, data) { showUserToast('Transaction completed!', 'success'); },
+                onTransactionFailed: function(transactionId, data) { showUserToast('Transaction failed', 'error'); },
+                onTransactionUpdate: function(data) { showUserToast(data.message || 'Transaction updated', 'info'); }
+            });
+            handler.initialize().then(() => {
+                const ids = Array.from(document.querySelectorAll('[data-transaction-id]')).map(el => el.dataset.transactionId);
+                ids.forEach(id => handler.joinTransactionGroup(id));
+            }).catch(err => console.error('[TransactionHub] Failed:', err));
+            </text>
+        }
+    </script>
+}

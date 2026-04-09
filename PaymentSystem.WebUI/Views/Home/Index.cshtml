@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_UserLayout";
+}
+
+<div class="user-dashboard">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1><i class="fas fa-home"></i> Welcome to PaymentSystem</h1>
+        <p>Your financial overview at a glance</p>
+    </div>
+
+    <!-- Welcome Card -->
+    <div class="card welcome-card">
+        <div class="card-body">
+            @{
+                var currentUserId = User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            }
+            <h2>Hello, @User.Identity?.Name!</h2>
+            <p>Manage your payments, wallets, and transactions all in one place.</p>
+            <div class="quick-actions">
+                <a asp-controller="Wallet" asp-action="GetWalletsByUserId" asp-route-userId="@currentUserId" class="btn btn-primary">
+                    <i class="fas fa-wallet"></i> View My Wallet
+                </a>
+                <a asp-controller="Payment" asp-action="GetPaymentsByUserId" asp-route-userId="@currentUserId" class="btn btn-success">
+                    <i class="fas fa-credit-card"></i> View Payments
+                </a>
+                <a asp-controller="Merchant" asp-action="GetAllMerchants" class="btn btn-info">
+                    <i class="fas fa-store"></i> Browse Merchants
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <h3>Multi-Currency Wallet</h3>
+            <p>Hold and manage multiple currencies in one secure wallet</p>
+            <a asp-controller="Wallet" asp-action="GetAllWallets" class="feature-link">Access Wallet <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h3>Secure Payments</h3>
+            <p>Make and receive payments securely with real-time tracking</p>
+            <a asp-controller="Payment" asp-action="GetAllPayments" class="feature-link">View Payments <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-exchange-alt"></i>
+            </div>
+            <h3>Transaction History</h3>
+            <p>Track all your transactions with detailed history</p>
+            <a asp-controller="Transaction" asp-action="GetAllTransactions" class="feature-link">View History <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <h3>Merchant Network</h3>
+            <p>Access our network of trusted merchants</p>
+            <a asp-controller="Merchant" asp-action="GetAllMerchants" class="feature-link">Browse Merchants <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Hidden element to store user ID for JavaScript -->
+    <div id="current-user-id" data-user-id="@currentUserId" style="display:none;"></div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('User Dashboard Loaded');
+            const userId = getCurrentUserId();
+            if (userId) {
+                console.log('User ID:', userId);
+            }
+        });
+    </script>
+}

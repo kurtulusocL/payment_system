@@ -1,0 +1,16 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Create Transaction Type";
+    Layout = "_AdminLayout";
+}
+<div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-plus-circle"></i> Create Transaction Type</h1><p>Add a new transaction type</p></div><a asp-controller="TransactionType" asp-action="GetAllTransactionTypes" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a></div></div>
+<div class="card"><div class="card-body">
+    <form asp-controller="TransactionType" asp-action="CreateTransactionType" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group"><label for="Name">Name</label><input type="text" id="Name" name="Name" class="form-control" placeholder="e.g., Deposit" required /></div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create</button>
+            <a asp-controller="TransactionType" asp-action="GetAllTransactionTypes" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+        </div>
+    </form>
+</div></div>

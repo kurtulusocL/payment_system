@@ -1,0 +1,3100 @@
+[
+  {
+    "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_8",
+    "RelativePath": "",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Accounts/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "ConfirmEmail",
+    "RelativePath": "api/Accounts/confirm-email",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.ConfirmCodeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/Accounts/forgot-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.ForgotPasswordRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "GoogleLogin",
+    "RelativePath": "api/Accounts/google-login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.GoogleLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "Login",
+    "RelativePath": "api/Accounts/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "LoginWithConfirmCode",
+    "RelativePath": "api/Accounts/login-with-confirm-code",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "Logout",
+    "RelativePath": "api/Accounts/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Accounts/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Accounts/profile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.UpdateProfileDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "Register",
+    "RelativePath": "api/Accounts/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Accounts/reset-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "GetRoleAssignments",
+    "RelativePath": "api/Accounts/roles/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "AssignRoles",
+    "RelativePath": "api/Accounts/roles/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "roles",
+        "Type": "System.Collections.Generic.List\u00601[[PaymentSystem.Shared.ViewModels.RoleAssignVM, PaymentSystem.Shared, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AccountsController",
+    "Method": "VerifyConfirmCode",
+    "RelativePath": "api/Accounts/verify-confirm-code",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "PaymentSystem.Shared.Dtos.AuthDtos.LoginConfirmCodeDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "GetAuditById",
+    "RelativePath": "api/Audits/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "DeleteAuditsById",
+    "RelativePath": "api/Audits/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "GetAllAudits",
+    "RelativePath": "api/Audits/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "GetAllAuditsForAdmin",
+    "RelativePath": "api/Audits/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "GetAllAuditsByUserId",
+    "RelativePath": "api/Audits/get-by-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "Delete",
+    "RelativePath": "api/Audits/hard-delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "Restore",
+    "RelativePath": "api/Audits/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "SetActive",
+    "RelativePath": "api/Audits/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Audits/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.AuditsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Audits/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetCurrencyById",
+    "RelativePath": "api/Currencies/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "DeleteCurrency",
+    "RelativePath": "api/Currencies/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "CreateCurrency",
+    "RelativePath": "api/Currencies/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.CurrencyDtos.CurrencyCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "DeleteCurrenciesById",
+    "RelativePath": "api/Currencies/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetAllCurrencies",
+    "RelativePath": "api/Currencies/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetAllCurrenciesForAdmin",
+    "RelativePath": "api/Currencies/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetCurrenciesByPayment",
+    "RelativePath": "api/Currencies/get-by-payment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetCurrenciesByTransaction",
+    "RelativePath": "api/Currencies/get-by-transaction",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetCurrenciesByWallet",
+    "RelativePath": "api/Currencies/get-by-wallet",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "GetCurrencyForEdit",
+    "RelativePath": "api/Currencies/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "Restore",
+    "RelativePath": "api/Currencies/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "SetActive",
+    "RelativePath": "api/Currencies/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Currencies/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Currencies/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.CurrenciesController",
+    "Method": "UpdateCurrency",
+    "RelativePath": "api/Currencies/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.CurrencyDtos.CurrencyUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "GetExceptionById",
+    "RelativePath": "api/ExceptionLoggers/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "DeleteException",
+    "RelativePath": "api/ExceptionLoggers/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "DeleteExceptionsById",
+    "RelativePath": "api/ExceptionLoggers/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "GetAllExceptions",
+    "RelativePath": "api/ExceptionLoggers/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "GetAllExceptionsForAdmin",
+    "RelativePath": "api/ExceptionLoggers/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "Restore",
+    "RelativePath": "api/ExceptionLoggers/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "SetActive",
+    "RelativePath": "api/ExceptionLoggers/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "SetInactive",
+    "RelativePath": "api/ExceptionLoggers/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.ExceptionLoggersController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/ExceptionLoggers/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetMerchantById",
+    "RelativePath": "api/Merchants/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "DeleteMerchant",
+    "RelativePath": "api/Merchants/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "CreateMerchant",
+    "RelativePath": "api/Merchants/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.MerchantDtos.MerchantCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "DeleteMerchantsById",
+    "RelativePath": "api/Merchants/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetAllMerchants",
+    "RelativePath": "api/Merchants/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetAllMerchantsForAdmin",
+    "RelativePath": "api/Merchants/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetMerchantsByPayment",
+    "RelativePath": "api/Merchants/get-by-payment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetMerchantsByStatusId",
+    "RelativePath": "api/Merchants/get-by-status/{statusId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "statusId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetMerchantForEdit",
+    "RelativePath": "api/Merchants/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "GetMerchantsByNullTaskNumber",
+    "RelativePath": "api/Merchants/get-null-task-numbers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "Restore",
+    "RelativePath": "api/Merchants/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "SetActive",
+    "RelativePath": "api/Merchants/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Merchants/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Merchants/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantsController",
+    "Method": "UpdateMerchant",
+    "RelativePath": "api/Merchants/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.MerchantDtos.MerchantUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "GetMerchantStatusById",
+    "RelativePath": "api/MerchantStatuses/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "DeleteMerchantStatus",
+    "RelativePath": "api/MerchantStatuses/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "CreateMerchantStatus",
+    "RelativePath": "api/MerchantStatuses/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.MerchantStatusDtos.MerchantStatusCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "DeleteMerchantStatusesById",
+    "RelativePath": "api/MerchantStatuses/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "GetAllMerchantStatuses",
+    "RelativePath": "api/MerchantStatuses/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "GetAllMerchantStatusesForAdmin",
+    "RelativePath": "api/MerchantStatuses/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "GetMerchantStatusesByMerchants",
+    "RelativePath": "api/MerchantStatuses/get-by-merchant",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "GetMerchantStatusForEdit",
+    "RelativePath": "api/MerchantStatuses/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "Restore",
+    "RelativePath": "api/MerchantStatuses/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "SetActive",
+    "RelativePath": "api/MerchantStatuses/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "SetInactive",
+    "RelativePath": "api/MerchantStatuses/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/MerchantStatuses/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.MerchantStatusesController",
+    "Method": "UpdateMerchantStatus",
+    "RelativePath": "api/MerchantStatuses/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.MerchantStatusDtos.MerchantStatusUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "GetOutboxEventById",
+    "RelativePath": "api/OutboxEvents/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "DeleteOutboxEvent",
+    "RelativePath": "api/OutboxEvents/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "DeleteOutboxEventsById",
+    "RelativePath": "api/OutboxEvents/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "GetAllOutboxEvents",
+    "RelativePath": "api/OutboxEvents/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "GetAllOutboxEventsForAdmin",
+    "RelativePath": "api/OutboxEvents/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "GetFailedOutboxEvents",
+    "RelativePath": "api/OutboxEvents/get-failed",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "GetSuccessfulOutboxEvents",
+    "RelativePath": "api/OutboxEvents/get-successful",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "Restore",
+    "RelativePath": "api/OutboxEvents/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "SetActive",
+    "RelativePath": "api/OutboxEvents/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/OutboxEvents/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.OutboxEventsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/OutboxEvents/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetPaymentById",
+    "RelativePath": "api/Payments/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "DeletePayment",
+    "RelativePath": "api/Payments/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "CreatePayment",
+    "RelativePath": "api/Payments/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.PaymentDtos.PaymentCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "DeletePaymentsById",
+    "RelativePath": "api/Payments/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetAllPayments",
+    "RelativePath": "api/Payments/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetAllPaymentsForAdmin",
+    "RelativePath": "api/Payments/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetPaymentsByCurrencyId",
+    "RelativePath": "api/Payments/get-by-currency/{currencyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "currencyId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetPaymentsByMerchantId",
+    "RelativePath": "api/Payments/get-by-merchant/{merchantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "merchantId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetPaymentsByStatusId",
+    "RelativePath": "api/Payments/get-by-status/{statusId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "statusId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetPaymentsByUserId",
+    "RelativePath": "api/Payments/get-by-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "GetPaymentForEdit",
+    "RelativePath": "api/Payments/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "Restore",
+    "RelativePath": "api/Payments/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "SetActive",
+    "RelativePath": "api/Payments/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Payments/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Payments/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentsController",
+    "Method": "UpdatePayment",
+    "RelativePath": "api/Payments/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.PaymentDtos.PaymentUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "GetPaymentStatusById",
+    "RelativePath": "api/PaymentStatuses/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "DeletePaymentStatus",
+    "RelativePath": "api/PaymentStatuses/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "CreatePaymentStatus",
+    "RelativePath": "api/PaymentStatuses/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.PaymentStatusDtos.PaymentStatusCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "DeletePaymentStatusesById",
+    "RelativePath": "api/PaymentStatuses/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "GetAllPaymentStatuses",
+    "RelativePath": "api/PaymentStatuses/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "GetAllPaymentStatusesForAdmin",
+    "RelativePath": "api/PaymentStatuses/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "GetPaymentStatusesByPayments",
+    "RelativePath": "api/PaymentStatuses/get-by-payment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "GetPaymentStatusForEdit",
+    "RelativePath": "api/PaymentStatuses/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "Restore",
+    "RelativePath": "api/PaymentStatuses/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "SetActive",
+    "RelativePath": "api/PaymentStatuses/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "SetInactive",
+    "RelativePath": "api/PaymentStatuses/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/PaymentStatuses/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.PaymentStatusesController",
+    "Method": "UpdatePaymentStatus",
+    "RelativePath": "api/PaymentStatuses/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.PaymentStatusDtos.PaymentStatusUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "GetRoleById",
+    "RelativePath": "api/Roles/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "DeleteRole",
+    "RelativePath": "api/Roles/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "CreateRole",
+    "RelativePath": "api/Roles/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.AppRoleDtos.AppRoleCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "DeleteRolesById",
+    "RelativePath": "api/Roles/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "GetAllRoles",
+    "RelativePath": "api/Roles/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "GetAllRolesForAdmin",
+    "RelativePath": "api/Roles/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "GetRoleForEdit",
+    "RelativePath": "api/Roles/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "Restore",
+    "RelativePath": "api/Roles/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "SetActive",
+    "RelativePath": "api/Roles/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Roles/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Roles/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.RolesController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/Roles/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.AppRoleDtos.AppRoleUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "GetSecuritySettingById",
+    "RelativePath": "api/SecuritySettings/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "DeleteSecuritySetting",
+    "RelativePath": "api/SecuritySettings/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "CreateSecuritySetting",
+    "RelativePath": "api/SecuritySettings/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.SecuritySettingDtos.SecuritySettingCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "DeleteSecuritySettingsById",
+    "RelativePath": "api/SecuritySettings/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "GetAllSecuritySettings",
+    "RelativePath": "api/SecuritySettings/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "GetAllSecuritySettingsForAdmin",
+    "RelativePath": "api/SecuritySettings/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "GetSecuritySettingForEdit",
+    "RelativePath": "api/SecuritySettings/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "Restore",
+    "RelativePath": "api/SecuritySettings/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "SetActive",
+    "RelativePath": "api/SecuritySettings/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/SecuritySettings/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/SecuritySettings/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.SecuritySettingsController",
+    "Method": "UpdateSecuritySetting",
+    "RelativePath": "api/SecuritySettings/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.SecuritySettingDtos.SecuritySettingUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetTransactionById",
+    "RelativePath": "api/Transactions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "DeleteTransaction",
+    "RelativePath": "api/Transactions/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "CreateTransaction",
+    "RelativePath": "api/Transactions/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.TransactionDtos.TransactionCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "DeleteTransactionsById",
+    "RelativePath": "api/Transactions/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetAllTransactions",
+    "RelativePath": "api/Transactions/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetAllTransactionsForAdmin",
+    "RelativePath": "api/Transactions/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetTransactionsByCurrencyId",
+    "RelativePath": "api/Transactions/get-by-currency/{currencyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "currencyId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetTransactionsByPaymentId",
+    "RelativePath": "api/Transactions/get-by-payment/{paymentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "paymentId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetTransactionsByTransactionTypeId",
+    "RelativePath": "api/Transactions/get-by-type/{transactionTypeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "transactionTypeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetTransactionsByWalletId",
+    "RelativePath": "api/Transactions/get-by-wallet/{walletId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "walletId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "GetTransactionForEdit",
+    "RelativePath": "api/Transactions/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "Restore",
+    "RelativePath": "api/Transactions/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "SetActive",
+    "RelativePath": "api/Transactions/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Transactions/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Transactions/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionsController",
+    "Method": "UpdateTransaction",
+    "RelativePath": "api/Transactions/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.TransactionDtos.TransactionUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "GetTransactionTypeById",
+    "RelativePath": "api/TransactionTypes/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "DeleteTransactionType",
+    "RelativePath": "api/TransactionTypes/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "CreateTransactionType",
+    "RelativePath": "api/TransactionTypes/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.TransactionTypeDto.TransactionTypeCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "DeleteTransactionTypesById",
+    "RelativePath": "api/TransactionTypes/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "GetAllTransactionTypes",
+    "RelativePath": "api/TransactionTypes/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "GetAllTransactionTypesForAdmin",
+    "RelativePath": "api/TransactionTypes/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "GetTransactionTypesByTransactions",
+    "RelativePath": "api/TransactionTypes/get-by-transaction",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "GetTransactionTypeForEdit",
+    "RelativePath": "api/TransactionTypes/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "Restore",
+    "RelativePath": "api/TransactionTypes/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "SetActive",
+    "RelativePath": "api/TransactionTypes/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "SetInactive",
+    "RelativePath": "api/TransactionTypes/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/TransactionTypes/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.TransactionTypesController",
+    "Method": "UpdateTransactionType",
+    "RelativePath": "api/TransactionTypes/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.TransactionTypeDto.TransactionTypeUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "GetUserById",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/Users/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "DeleteUsersById",
+    "RelativePath": "api/Users/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "GetAllActiveUsers",
+    "RelativePath": "api/Users/get-active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Users/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "GetAllUsersForAdmin",
+    "RelativePath": "api/Users/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "GetAllDeletedUsers",
+    "RelativePath": "api/Users/get-deleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "GetAllInactiveUsers",
+    "RelativePath": "api/Users/get-inactive",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "Restore",
+    "RelativePath": "api/Users/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "SetActive",
+    "RelativePath": "api/Users/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Users/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UsersController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Users/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetUserSessionById",
+    "RelativePath": "api/UserSessions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "DeleteUserSession",
+    "RelativePath": "api/UserSessions/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "DeleteUserSessionsById",
+    "RelativePath": "api/UserSessions/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetAllUserSessions",
+    "RelativePath": "api/UserSessions/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetAllUserSessionsForAdmin",
+    "RelativePath": "api/UserSessions/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetUserSessionsByOnlineDuration",
+    "RelativePath": "api/UserSessions/get-by-duration",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetUserSessionsByLoginDate",
+    "RelativePath": "api/UserSessions/get-by-login-date",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetUserSessionsByUserId",
+    "RelativePath": "api/UserSessions/get-by-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "GetOnlineUserSessions",
+    "RelativePath": "api/UserSessions/get-online",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "Restore",
+    "RelativePath": "api/UserSessions/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "SetActive",
+    "RelativePath": "api/UserSessions/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/UserSessions/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.UserSessionsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/UserSessions/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "GetWalletById",
+    "RelativePath": "api/Wallets/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "DeleteWallet",
+    "RelativePath": "api/Wallets/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "CreateWallet",
+    "RelativePath": "api/Wallets/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.WalletDtos.WalletCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "DeleteWalletsById",
+    "RelativePath": "api/Wallets/delete-multiple",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ids",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "GetAllWallets",
+    "RelativePath": "api/Wallets/get-all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "GetAllWalletsForAdmin",
+    "RelativePath": "api/Wallets/get-all-admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "GetWalletsByCurrencyId",
+    "RelativePath": "api/Wallets/get-by-currency/{currencyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "currencyId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "GetWalletsByUserId",
+    "RelativePath": "api/Wallets/get-by-user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "GetWalletForEdit",
+    "RelativePath": "api/Wallets/get-for-edit/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "Restore",
+    "RelativePath": "api/Wallets/restore/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "SetActive",
+    "RelativePath": "api/Wallets/set-active/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "SetInactive",
+    "RelativePath": "api/Wallets/set-inactive/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "SoftDelete",
+    "RelativePath": "api/Wallets/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WalletsController",
+    "Method": "UpdateWallet",
+    "RelativePath": "api/Wallets/update",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PaymentSystem.Shared.Dtos.MappingDtos.WalletDtos.WalletUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_7",
+    "RelativePath": "health",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PaymentSystem.Api.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[PaymentSystem.Api.WeatherForecast, PaymentSystem.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]

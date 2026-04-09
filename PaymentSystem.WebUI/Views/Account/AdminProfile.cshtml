@@ -1,0 +1,123 @@
+@model PaymentSystem.Shared.Dtos.AuthDtos.AdminUpdateProfileDto
+@{
+    ViewData["Title"] = "User Profile (Admin View)";
+    Layout = "_AdminLayout";
+}
+
+<div class="container py-4">
+    <div class="page-header mb-4">
+        <h1><i class="fas fa-user-edit"></i> User Profile</h1>
+        <p>View and edit user account details</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model == null)
+    {
+        <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i> Failed to load user profile data.</div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header"><h3><i class="fas fa-info-circle"></i> User Information</h3></div>
+                    <div class="card-body">
+                        <form asp-controller="Account" asp-action="AdminUpdateProfile" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="TargetUserId" />
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="NameSurname" class="form-label">Full Name</label>
+                                    <input type="text" asp-for="NameSurname" class="form-control" required />
+                                    <span asp-validation-for="NameSurname" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                                    <input type="tel" asp-for="PhoneNumber" class="form-control" />
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Title" class="form-label">Title</label>
+                                    <input type="text" asp-for="Title" class="form-control" />
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Birthdate" class="form-label">Birthdate</label>
+                                    <input type="date" asp-for="Birthdate" class="form-control" value="@(Model.Birthdate != default ? Model.Birthdate.ToString("yyyy-MM-dd") : "")" />
+                                    <span asp-validation-for="Birthdate" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" asp-for="IsActive" id="isActiveSwitch" />
+                                        <label class="form-check-label" for="isActiveSwitch">Account Active</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" asp-for="IsDeleted" id="isDeletedSwitch" />
+                                        <label class="form-check-label" for="isDeletedSwitch">Account Deleted (Soft Delete)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update Profile</button>
+                                <a asp-controller="Account" asp-action="AdminChangePassword" asp-route-userId="@Model.TargetUserId" class="btn btn-outline-secondary"><i class="fas fa-key"></i> Change Password</a>
+                                <a asp-controller="HomeAdmin" asp-action="Index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header"><h3><i class="fas fa-shield-alt"></i> Account Details</h3></div>
+                    <div class="card-body">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-5">User ID</dt>
+                            <dd class="col-sm-7"><code>@Model.TargetUserId</code></dd>
+
+                            <dt class="col-sm-5">Status</dt>
+                            <dd class="col-sm-7">
+                                @if (Model.IsActive && !Model.IsDeleted)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else if (Model.IsDeleted)
+                                {
+                                    <span class="badge bg-danger">Deleted</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">Inactive</span>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

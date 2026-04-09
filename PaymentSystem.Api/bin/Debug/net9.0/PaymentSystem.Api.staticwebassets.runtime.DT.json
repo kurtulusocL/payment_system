@@ -1,0 +1,40 @@
+{
+  "ContentRoots": [
+    "/src/PaymentSystem.Api/wwwroot/",
+    "/src/PaymentSystem.Api/obj/Debug/net9.0/compressed/"
+  ],
+  "Root": {
+    "Children": {
+      "Logs": {
+        "Children": {
+          "SerilogLogs.txt": {
+            "Children": null,
+            "Asset": {
+              "ContentRootIndex": 0,
+              "SubPath": "Logs/SerilogLogs.txt"
+            },
+            "Patterns": null
+          },
+          "SerilogLogs.txt.gz": {
+            "Children": null,
+            "Asset": {
+              "ContentRootIndex": 1,
+              "SubPath": "uejtb1x3lb-{0}-hwx6uxtsqi-hwx6uxtsqi.gz"
+            },
+            "Patterns": null
+          }
+        },
+        "Asset": null,
+        "Patterns": null
+      }
+    },
+    "Asset": null,
+    "Patterns": [
+      {
+        "ContentRootIndex": 0,
+        "Pattern": "**",
+        "Depth": 0
+      }
+    ]
+  }
+}

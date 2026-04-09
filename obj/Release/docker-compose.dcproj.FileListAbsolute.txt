@@ -1,0 +1,1 @@
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\obj\Release\docker-compose.dcproj.CoreCompileInputs.cache

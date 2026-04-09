@@ -1,0 +1,49 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "User Sessions By Login Date";
+    Layout = "_AdminLayout";
+}
+<div class="user-session-list-page">
+    <div class="page-header"><div><h1><i class="fas fa-calendar"></i> User Sessions By Login Date</h1><p>User sessions ordered by login date</p></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="UserSession" asp-action="GetAllUserSessions" class="btn btn-outline-secondary"><i class="fas fa-list"></i> All</a>
+        <a asp-controller="UserSession" asp-action="GetAllOnlineUserSessions" class="btn btn-outline-secondary"><i class="fas fa-wifi"></i> Online</a>
+        <a asp-controller="UserSession" asp-action="GetAllUserSessionsByUserId" class="btn btn-outline-secondary"><i class="fas fa-user"></i> By User</a>
+        <a asp-controller="UserSession" asp-action="GetAllUserSessionsByLoginDate" class="btn btn-primary active-filter"><i class="fas fa-calendar"></i> By Login Date</a>
+        <a asp-controller="UserSession" asp-action="GetAllUserSessionsByOnlineDuration" class="btn btn-outline-secondary"><i class="fas fa-hourglass-half"></i> By Duration</a>
+        <a asp-controller="UserSession" asp-action="GetAllUserSessionsForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No user sessions found</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="user-session-table">
+                    <thead><tr><th>#</th><th>Username</th><th>Login Time</th><th>Logout Time</th><th>Duration (min)</th><th>IP Address</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th><input type="text" class="column-search" placeholder="Search username..." /></th><th></th><th></th><th></th><th><input type="text" class="column-search" placeholder="Search IP..." /></th><th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var session in Model) {
+                            <tr><td>@i</td><td><strong>@session.Username</strong></td><td>@session.LoginDate?.ToString("dd MMM yyyy HH:mm")</td><td>@(session.LogoutDate?.ToString("dd MMM yyyy HH:mm") ?? "Online")</td><td>@session.OnlineDurationTime</td><td><code>@session.IpAddress</code></td><td>@(session.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                            <td class="actions-cell">
+                                <a asp-controller="UserSession" asp-action="GetUserSessionById" asp-route-id="@session.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                @if (session.IsActive == false) { <form asp-controller="UserSession" asp-action="SetActive" asp-route-id="@session.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form> }
+                                else { <form asp-controller="UserSession" asp-action="SetInactive" asp-route-id="@session.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i></button></form> }
+                                @if (session.IsDeleted == false) { <form asp-controller="UserSession" asp-action="SoftDelete" asp-route-id="@session.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form> }
+                                else { <form asp-controller="UserSession" asp-action="Restore" asp-route-id="@session.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form> }
+                            </td></tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#user-session-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[2,'desc']], "columnDefs":[{"orderable":false,"targets":[7]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([1,5,6].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+        });
+    </script>
+}

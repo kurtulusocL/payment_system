@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PaymentSystem Admin</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="admin-navbar">
+        <div class="admin-navbar-container">
+            <!-- Brand -->
+            <a asp-controller="HomeAdmin" asp-action="Index" class="navbar-brand">
+                <i class="fas fa-shield-alt"></i>
+                <span>PaymentSystem Admin</span>
+            </a>
+
+            <!-- Navbar Toggle (Mobile) -->
+            <button class="navbar-toggler" type="button" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Navbar Links -->
+            <ul class="navbar-nav" id="adminNavbar">
+                <!-- Dashboard -->
+                <li class="nav-item">
+                    <a asp-controller="HomeAdmin" asp-action="Index" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+
+                <!-- Security Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" onclick="toggleDropdown(this)">
+                        <i class="fas fa-lock"></i> Security
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-controller="Audit" asp-action="GetAllAudits" class="dropdown-item"><i class="fas fa-clipboard-list"></i> Audit</a></li>
+                        <li><a asp-controller="ExceptionLogger" asp-action="GetAllExceptions" class="dropdown-item"><i class="fas fa-bug"></i> Exception Logger</a></li>
+                        <li><a asp-controller="SecuritySetting" asp-action="GetAllSecuritySettings" class="dropdown-item"><i class="fas fa-cog"></i> Security Settings</a></li>
+                    </ul>
+                </li>
+
+                <!-- User Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" onclick="toggleDropdown(this)">
+                        <i class="fas fa-users"></i> Users
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-controller="User" asp-action="GetAllUsers" class="dropdown-item"><i class="fas fa-user"></i> Users</a></li>
+                        <li><a asp-controller="Role" asp-action="GetAllRoles" class="dropdown-item"><i class="fas fa-user-tag"></i> Roles</a></li>
+                        <li><a asp-controller="UserSession" asp-action="GetAllUserSessions" class="dropdown-item"><i class="fas fa-clock"></i> User Sessions</a></li>
+                    </ul>
+                </li>
+
+                <!-- Status Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" onclick="toggleDropdown(this)">
+                        <i class="fas fa-info-circle"></i> Status
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-controller="MerchantStatus" asp-action="GetAllMerchantStatuses" class="dropdown-item"><i class="fas fa-store"></i> Merchant Status</a></li>
+                        <li><a asp-controller="PaymentStatus" asp-action="GetAllPaymentStatuses" class="dropdown-item"><i class="fas fa-credit-card"></i> Payment Status</a></li>
+                        <li><a asp-controller="TransactionType" asp-action="GetAllTransactionTypes" class="dropdown-item"><i class="fas fa-exchange-alt"></i> Transaction Types</a></li>
+                    </ul>
+                </li>
+
+                <!-- Wallet -->
+                <li class="nav-item">
+                    <a asp-controller="Wallet" asp-action="GetAllWallets" class="nav-link">
+                        <i class="fas fa-wallet"></i> Wallet
+                    </a>
+                </li>
+
+                <!-- Payment -->
+                <li class="nav-item">
+                    <a asp-controller="Payment" asp-action="GetAllPayments" class="nav-link">
+                        <i class="fas fa-money-bill-wave"></i> Payment
+                    </a>
+                </li>
+
+                <!-- Merchant -->
+                <li class="nav-item">
+                    <a asp-controller="Merchant" asp-action="GetAllMerchants" class="nav-link">
+                        <i class="fas fa-store-alt"></i> Merchant
+                    </a>
+                </li>
+
+                <!-- Currency -->
+                <li class="nav-item">
+                    <a asp-controller="Currency" asp-action="GetAllCurrencies" class="nav-link">
+                        <i class="fas fa-coins"></i> Currency
+                    </a>
+                </li>
+
+                <!-- OutboxEvent -->
+                <li class="nav-item">
+                    <a asp-controller="OutboxEvent" asp-action="GetAllOutboxEvents" class="nav-link">
+                        <i class="fas fa-envelope-open-text"></i> Outbox Events
+                    </a>
+                </li>
+            </ul>
+
+            <!-- User Profile Dropdown (Right side) -->
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle user-profile-toggle" href="#" onclick="toggleDropdown(this)">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="user-name">@User.Identity?.Name</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a asp-controller="Account" asp-action="Profile" class="dropdown-item"><i class="fas fa-user-edit"></i> Update Profile</a></li>
+                        <li><a asp-controller="Account" asp-action="ChangePassword" class="dropdown-item"><i class="fas fa-key"></i> Change Password</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="dropdown-item-form">
+                                <button type="submit" class="dropdown-item dropdown-item-logout">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+        <div class="container-fluid">
+            <!-- Toast Container -->
+            <div id="toast-container"></div>
+
+            <!-- Alerts -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Error:</strong> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle"></i>
+                    <strong>Success:</strong> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="admin-footer">
+        <div class="container-fluid">
+            <p>&copy; @DateTime.UtcNow.Year - PaymentSystem Admin Panel</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js" asp-fallback-src="~/lib/signalr/signalr.min.js" asp-fallback-test="window.signalR"></script>
+    <script src="~/js/signalr-connection.js" asp-append-version="true"></script>
+    <script src="~/js/admin-layout.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

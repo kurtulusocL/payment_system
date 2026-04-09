@@ -1,0 +1,68 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "All Transaction Types (Admin)";
+    Layout = "_AdminLayout";
+}
+<div class="transaction-type-admin-page">
+    <div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-shield-alt"></i> All Transaction Types (Admin View)</h1><p>Complete transaction type records with all statuses</p></div><div><a asp-controller="TransactionType" asp-action="CreateTransactionType" class="btn btn-primary"><i class="fas fa-plus"></i> New Type</a></div></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="TransactionType" asp-action="GetAllTransactionTypes" class="btn btn-outline-secondary"><i class="fas fa-list"></i> Active</a>
+        <a asp-controller="TransactionType" asp-action="GetAllTransactionTypesByTransactions" class="btn btn-outline-secondary"><i class="fas fa-chart-bar"></i> By Transactions</a>
+        <a asp-controller="TransactionType" asp-action="GetAllTransactionTypesForAdmin" class="btn btn-primary active-filter"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="bulk-actions-bar card mb-3">
+        <div class="card-body"><div class="flex-between">
+            <div class="bulk-actions-left">
+                <label class="checkbox-label"><input type="checkbox" id="selectAllCheckbox" onclick="toggleSelectAll()" /><span class="checkmark"></span>Select All</label>
+                <span id="selectedCount" class="selected-count">0 items selected</span>
+            </div>
+            <div class="bulk-actions-right"><button type="button" class="btn btn-danger" id="bulkDeleteBtn" onclick="bulkDelete()" disabled><i class="fas fa-trash-alt"></i> Delete Selected</button></div>
+        </div></div>
+    </div>
+    <form id="bulkDeleteForm" asp-controller="TransactionType" asp-action="DeleteTransactionTypesById" method="post" style="display:none;"></form>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No transaction types found</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="transaction-type-table">
+                    <thead><tr><th><input type="checkbox" id="headerCheckbox" onclick="toggleSelectAll()" /></th><th>#</th><th>Name</th><th>Transaction Count</th><th>Active</th><th>Deleted</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th></th><th><input type="text" class="column-search" placeholder="Search name..." /></th><th></th><th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th><th><select class="column-search"><option value="">All</option><option value="Deleted">Deleted</option><option value="Not Deleted">Not Deleted</option></select></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var t in Model) {
+                            <tr class="@(t.IsDeleted == true ? "row-deleted" : "")">
+                                <td><input type="checkbox" class="row-checkbox" data-id="@t.Id" onclick="updateSelectedCount()" /></td>
+                                <td>@i</td><td><strong>@t.Name</strong></td><td>@t.TransactionCount</td>
+                                <td>@(t.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                                <td>@(t.IsDeleted == true ? "<span class='status-badge status-deleted'>Deleted</span>" : "<span class='status-badge status-active'>Not Deleted</span>")</td>
+                                <td class="actions-cell">
+                                    <a asp-controller="TransactionType" asp-action="GetTransactionTypeById" asp-route-id="@t.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                    <a asp-controller="TransactionType" asp-action="GetTransactionTypeForEdit" asp-route-id="@t.Id" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    @if (t.IsActive == false) { <form asp-controller="TransactionType" asp-action="SetActive" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form> }
+                                    else { <form asp-controller="TransactionType" asp-action="SetInactive" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i></button></form> }
+                                    @if (t.IsDeleted == false) { <form asp-controller="TransactionType" asp-action="SoftDelete" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form> }
+                                    else { <form asp-controller="TransactionType" asp-action="Restore" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form> }
+                                    <form asp-controller="TransactionType" asp-action="DeleteTransactionType" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-dark" title="Hard Delete" onclick="return confirm('PERMANENTLY delete?')"><i class="fas fa-exclamation-triangle"></i></button></form>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#transaction-type-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[2,'asc']], "columnDefs":[{"orderable":false,"targets":[0,6]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([2,4,5].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+            $('#transaction-type-table').on('change','.row-checkbox',function(){updateSelectedCount();});
+            $('#selectAllCheckbox').on('change',function(){var v=$(this).is(':checked');$('#transaction-type-table').find('.row-checkbox').prop('checked',v);$('#headerCheckbox').prop('checked',v);updateSelectedCount();});
+        });
+        function toggleSelectAll(){var v=document.getElementById('headerCheckbox').checked||document.getElementById('selectAllCheckbox').checked;document.getElementById('headerCheckbox').checked=v;document.getElementById('selectAllCheckbox').checked=v;document.querySelectorAll('.row-checkbox').forEach(c=>{c.checked=v;});updateSelectedCount();}
+        function updateSelectedCount(){var s=Array.from(document.querySelectorAll('.row-checkbox')).filter(c=>c.checked).length;document.getElementById('selectedCount').textContent=s+' item(s) selected';document.getElementById('bulkDeleteBtn').disabled=s===0;var t=document.querySelectorAll('.row-checkbox').length;document.getElementById('headerCheckbox').checked=s===t;document.getElementById('selectAllCheckbox').checked=s===t;}
+        function bulkDelete(){var ids=Array.from(document.querySelectorAll('.row-checkbox:checked')).map(c=>c.dataset.id);if(ids.length===0){alert('No items selected');return;}if(!confirm('PERMANENTLY delete '+ids.length+' transaction types?'))return;var f=document.getElementById('bulkDeleteForm');f.querySelectorAll('input[name="ids"]').forEach(i=>i.remove());ids.forEach(id=>{var i=document.createElement('input');i.type='hidden';i.name='ids';i.value=id;f.appendChild(i);});f.submit();}
+    </script>
+}

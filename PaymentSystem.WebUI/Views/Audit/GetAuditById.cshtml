@@ -1,0 +1,221 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Audit Detail";
+    Layout = "_AdminLayout";
+}
+
+<div class="audit-detail-page">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="flex-between">
+            <div>
+                <h1><i class="fas fa-file-alt"></i> Audit Record Detail</h1>
+                <p>Detailed information for audit ID: <strong>@Model?.Id</strong></p>
+            </div>
+            <div>
+                <a asp-controller="Audit" asp-action="GetAllAudits" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Audits
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Audit record not found!</strong>
+        </div>
+    }
+    else
+    {
+        <!-- Main Info Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fas fa-info-circle"></i> General Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <div class="detail-label">Audit ID:</div>
+                        <div class="detail-value">@Model.Id</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Action:</div>
+                        <div class="detail-value"><span class="badge badge-info">@Model.Action</span></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Area Accessed:</div>
+                        <div class="detail-value">@Model.AreaAccessed</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">IP Address:</div>
+                        <div class="detail-value"><code>@Model.IpAddress</code></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">User Agent:</div>
+                        <div class="detail-value"><small>@Model.UserAgent</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Info Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fas fa-toggle-on"></i> Status Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <div class="detail-label">Active Status:</div>
+                        <div class="detail-value">
+                            @if (Model.IsActive == true)
+                            {
+                                <span class="status-badge status-active">Active</span>
+                            }
+                            else
+                            {
+                                <span class="status-badge status-inactive">Inactive</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Deleted Status:</div>
+                        <div class="detail-value">
+                            @if (Model.IsDeleted == true)
+                            {
+                                <span class="status-badge status-deleted">Deleted</span>
+                            }
+                            else
+                            {
+                                <span class="status-badge status-active">Not Deleted</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Information Card -->
+        @if (Model.User != null)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3><i class="fas fa-user"></i> User Information</h3>
+                </div>
+                <div class="card-body">
+                    <div class="detail-grid">
+                        <div class="detail-row">
+                            <div class="detail-label">User ID:</div>
+                            <div class="detail-value"><code>@Model.UserId</code></div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Email:</div>
+                            <div class="detail-value">@Model.User.Email</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Name Surname:</div>
+                            <div class="detail-value">@Model.User.NameSurname</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Phone Number:</div>
+                            <div class="detail-value">@Model.User.PhoneNumber</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">User Status:</div>
+                            <div class="detail-value">
+                                @if (Model.User.IsActive == true)
+                                {
+                                    <span class="status-badge status-active">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="status-badge status-inactive">Inactive</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a asp-controller="Audit" asp-action="GetAllAuditsByUserId" asp-route-userId="@Model.UserId" class="btn btn-primary">
+                            <i class="fas fa-list"></i> View All Audits for This User
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Timestamps Card -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3><i class="fas fa-clock"></i> Timestamps</h3>
+            </div>
+            <div class="card-body">
+                <div class="detail-grid">
+                    <div class="detail-row">
+                        <div class="detail-label">Created Date:</div>
+                        <div class="detail-value">@Model.CreatedDate?.ToString("dd MMMM yyyy, HH:mm:ss")</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Updated Date:</div>
+                        <div class="detail-value">@(Model.UpdatedDate?.ToString("dd MMMM yyyy, HH:mm:ss") ?? "Never")</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Deleted Date:</div>
+                        <div class="detail-value">@(Model.DeletedDate?.ToString("dd MMMM yyyy, HH:mm:ss") ?? "Not Deleted")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Card -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-cogs"></i> Actions</h3>
+            </div>
+            <div class="card-body">
+                <div class="action-buttons">
+                    @if (Model.IsActive == false)
+                    {
+                        <form asp-controller="Audit" asp-action="SetActive" asp-route-id="@Model.Id" method="post" class="inline-form">
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Set this audit as active?')">
+                                <i class="fas fa-check"></i> Set Active
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Audit" asp-action="SetInactive" asp-route-id="@Model.Id" method="post" class="inline-form">
+                            <button type="submit" class="btn btn-warning" onclick="return confirm('Set this audit as inactive?')">
+                                <i class="fas fa-ban"></i> Set Inactive
+                            </button>
+                        </form>
+                    }
+
+                    @if (Model.IsDeleted == false)
+                    {
+                        <form asp-controller="Audit" asp-action="SoftDelete" asp-route-id="@Model.Id" method="post" class="inline-form">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Soft delete this audit?')">
+                                <i class="fas fa-trash"></i> Soft Delete
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Audit" asp-action="Restore" asp-route-id="@Model.Id" method="post" class="inline-form">
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('Restore this audit?')">
+                                <i class="fas fa-undo"></i> Restore
+                            </button>
+                        </form>
+                    }
+
+                    <form asp-controller="Audit" asp-action="Delete" asp-route-id="@Model.Id" method="post" class="inline-form">
+                        <button type="submit" class="btn btn-dark" onclick="return confirm('PERMANENTLY delete this audit? This cannot be undone!')">
+                            <i class="fas fa-exclamation-triangle"></i> Hard Delete (Permanent)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

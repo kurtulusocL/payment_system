@@ -1,0 +1,18 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Create Payment";
+    Layout = "_Layout";
+}
+<div class="container py-4">
+    <div class="page-header mb-4"><h1><i class="fas fa-plus-circle"></i> Create Payment</h1><p>Make a new payment</p></div>
+    <div class="row justify-content-center"><div class="col-md-6"><div class="card"><div class="card-body">
+        <form asp-controller="UserHome" asp-action="CreatePayment" method="post">@Html.AntiForgeryToken()
+            <div class="mb-3"><label class="form-label">Amount</label><input type="number" name="Amount" class="form-control" step="0.01" required /></div>
+            <div class="mb-3"><label class="form-label">Card Number</label><input type="text" name="MaskedCardNumber" class="form-control" placeholder="****1234" /></div>
+            <div class="mb-3"><label class="form-label">Merchant ID</label><input type="number" name="MerchantId" class="form-control" required /></div>
+            <div class="mb-3"><label class="form-label">Currency ID</label><input type="number" name="CurrencyId" class="form-control" required /></div>
+            <div class="mb-3"><label class="form-label">Payment Status ID</label><input type="number" name="PaymentStatusId" class="form-control" value="1" required /></div>
+            <div class="d-flex gap-2"><button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create</button><a asp-controller="UserHome" asp-action="MyPayments" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a></div>
+        </form>
+    </div></div></div></div>
+</div>

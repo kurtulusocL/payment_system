@@ -1,0 +1,49 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Wallets By Currency";
+    Layout = "_AdminLayout";
+    var currencyId = ViewBag.CurrencyId as int?;
+}
+<div class="wallet-list-page">
+    <div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-coins"></i> Wallets By Currency</h1><p>Currency ID: @currencyId</p></div><div><a asp-controller="Wallet" asp-action="CreateWallet" class="btn btn-primary"><i class="fas fa-plus"></i> New Wallet</a></div></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="Wallet" asp-action="GetAllWallets" class="btn btn-outline-secondary"><i class="fas fa-wallet"></i> Active</a>
+        <a asp-controller="Wallet" asp-action="GetAllWalletsByUserId" class="btn btn-outline-secondary"><i class="fas fa-user"></i> By User</a>
+        <a asp-controller="Wallet" asp-action="GetAllWalletsByCurrencyId" class="btn btn-primary active-filter"><i class="fas fa-coins"></i> By Currency</a>
+        <a asp-controller="Wallet" asp-action="GetAllWalletsForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No wallets found for this currency</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="wallet-table">
+                    <thead><tr><th>#</th><th>User</th><th>Currency</th><th>Balance</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th><input type="text" class="column-search" placeholder="Search user..." /></th><th><input type="text" class="column-search" placeholder="Search currency..." /></th><th><input type="text" class="column-search" placeholder="Search balance..." /></th><th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var w in Model) {
+                            <tr data-wallet-id="@w.Id"><td>@i</td><td><strong>@w.UserEmail</strong></td><td>@w.CurrencyName</td><td class="wallet-balance">$@w.Balance</td><td>@(w.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                            <td class="actions-cell">
+                                <a asp-controller="Wallet" asp-action="GetWalletById" asp-route-id="@w.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <a asp-controller="Wallet" asp-action="GetWalletForEdit" asp-route-id="@w.Id" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                @if (w.IsActive == false) { <form asp-controller="Wallet" asp-action="SetActive" asp-route-id="@w.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i></button></form> }
+                                else { <form asp-controller="Wallet" asp-action="SetInactive" asp-route-id="@w.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-ban"></i></button></form> }
+                                @if (w.IsDeleted == false) { <form asp-controller="Wallet" asp-action="SoftDelete" asp-route-id="@w.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form> }
+                                else { <form asp-controller="Wallet" asp-action="Restore" asp-route-id="@w.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-undo"></i></button></form> }
+                            </td></tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#wallet-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[3,'desc']], "columnDefs":[{"orderable":false,"targets":[5]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([1,2,3,4].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+        });
+    </script>
+}

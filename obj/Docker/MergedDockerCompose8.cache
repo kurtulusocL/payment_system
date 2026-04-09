@@ -1,0 +1,211 @@
+name: dockercompose8930788254185599735
+services:
+  paymentsystem.api:
+    build:
+      context: C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem
+      dockerfile: PaymentSystem.Api/Dockerfile
+    container_name: paymentsystem_api
+    depends_on:
+      rabbitmq:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+      sqlserver-azure:
+        condition: service_started
+        required: true
+      sqlserver-local:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__AzureConnection: Server=paymentsystem_sqlserver_azure,1433;Database=PaymentSystemAzure_Simule;User Id=sa;Password=PaymentSystem_Azure123!;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      ConnectionStrings__DefaultConnection: Server=paymentsystem_sqlserver_local,1433;Database=PaymentSystem;User Id=sa;Password=PaymentSystem_Local123!;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      ConnectionStrings__RabbitMQ: amqp://guest:guest@paymentsystem_rabbitmq:5672/
+      ConnectionStrings__Redis: paymentsystem_redis:6379
+      JwtSettings__Audience: PaymentSystemClient
+      JwtSettings__ExpiryMinutes: "60"
+      JwtSettings__Issuer: PaymentSystem
+      JwtSettings__Secret: yours
+    networks:
+      paymentsystem_network: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5000"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5001"
+        protocol: tcp
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind: {}
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind: {}
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind: {}
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind: {}
+  paymentsystem.webui:
+    build:
+      context: C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem
+      dockerfile: PaymentSystem.WebUI/Dockerfile
+    container_name: paymentsystem_webui
+    depends_on:
+      paymentsystem.api:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ApiSettings__BaseUrl: http://paymentsystem.api:8080
+      ApiSettings__HttpUrl: http://paymentsystem.api:8080
+    networks:
+      paymentsystem_network: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "5002"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "5003"
+        protocol: tcp
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind: {}
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/Microsoft/UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind: {}
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind: {}
+      - type: bind
+        source: C:\Users\kurtu\AppData\Roaming/ASP.NET/Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind: {}
+  rabbitmq:
+    container_name: paymentsystem_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: guest
+    image: rabbitmq:3.13-management-alpine
+    networks:
+      paymentsystem_network: null
+    ports:
+      - mode: ingress
+        target: 5672
+        published: "5672"
+        protocol: tcp
+      - mode: ingress
+        target: 15672
+        published: "15672"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: rabbitmq_data
+        target: /var/lib/rabbitmq
+        volume: {}
+  redis:
+    container_name: paymentsystem_redis
+    image: redis:7.4-alpine
+    networks:
+      paymentsystem_network: null
+    ports:
+      - mode: ingress
+        target: 6379
+        published: "6379"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: redis_data
+        target: /data
+        volume: {}
+  sqlserver-azure:
+    container_name: paymentsystem_sqlserver_azure
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      SA_PASSWORD: PaymentSystem_Azure123!
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      paymentsystem_network: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1434"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: sqlserver_azure_data
+        target: /var/opt/mssql
+        volume: {}
+  sqlserver-local:
+    container_name: paymentsystem_sqlserver_local
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      SA_PASSWORD: PaymentSystem_Local123!
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      paymentsystem_network: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: sqlserver_local_data
+        target: /var/opt/mssql
+        volume: {}
+networks:
+  paymentsystem_network:
+    name: dockercompose8930788254185599735_paymentsystem_network
+    driver: bridge
+volumes:
+  rabbitmq_data:
+    name: dockercompose8930788254185599735_rabbitmq_data
+  redis_data:
+    name: dockercompose8930788254185599735_redis_data
+  sqlserver_azure_data:
+    name: dockercompose8930788254185599735_sqlserver_azure_data
+  sqlserver_local_data:
+    name: dockercompose8930788254185599735_sqlserver_local_data

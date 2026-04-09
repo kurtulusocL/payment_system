@@ -1,0 +1,25 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Role Detail";
+    Layout = "_AdminLayout";
+}
+<div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-file-alt"></i> Role Detail</h1><p>ID: <strong>@Model?.Id</strong></p></div><a asp-controller="Role" asp-action="GetAllRoles" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a></div></div>
+@if (Model == null) { <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i><strong>Not found!</strong></div> }
+else {
+    <div class="card mb-3"><div class="card-header"><h3><i class="fas fa-info-circle"></i> Information</h3></div><div class="card-body"><div class="detail-grid">
+        <div class="detail-row"><div class="detail-label">ID:</div><div class="detail-value">@Model.Id</div></div>
+        <div class="detail-row"><div class="detail-label">Name:</div><div class="detail-value"><strong>@Model.Name</strong></div></div>
+        <div class="detail-row"><div class="detail-label">NormalizedName:</div><div class="detail-value">@Model.NormalizedName</div></div>
+        <div class="detail-row"><div class="detail-label">Active:</div><div class="detail-value">@(Model.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</div></div>
+        <div class="detail-row"><div class="detail-label">Deleted:</div><div class="detail-value">@(Model.IsDeleted == true ? "<span class='status-badge status-deleted'>Deleted</span>" : "No")</div></div>
+        <div class="detail-row"><div class="detail-label">Created:</div><div class="detail-value">@Model.CreatedDate?.ToString("dd MMM yyyy, HH:mm")</div></div>
+    </div></div></div>
+    <div class="card"><div class="card-header"><h3><i class="fas fa-cogs"></i> Actions</h3></div><div class="card-body"><div class="action-buttons">
+        <a asp-controller="Role" asp-action="GetRoleForEdit" asp-route-id="@Model.Id" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+        @if (Model.IsActive == false) { <form asp-controller="Role" asp-action="SetActive" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i> Set Active</button></form> }
+        else { <form asp-controller="Role" asp-action="SetInactive" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i> Set Inactive</button></form> }
+        @if (Model.IsDeleted == false) { <form asp-controller="Role" asp-action="SoftDelete" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i> Soft Delete</button></form> }
+        else { <form asp-controller="Role" asp-action="Restore" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i> Restore</button></form> }
+        <form asp-controller="Role" asp-action="DeleteRole" asp-route-id="@Model.Id" method="post" class="inline-form"><button type="submit" class="btn btn-dark" onclick="return confirm('PERMANENTLY delete?')"><i class="fas fa-exclamation-triangle"></i> Hard Delete</button></form>
+    </div></div></div>
+}

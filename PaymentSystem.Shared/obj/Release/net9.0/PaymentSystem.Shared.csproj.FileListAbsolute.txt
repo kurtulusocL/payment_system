@@ -1,0 +1,12 @@
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\bin\Release\net9.0\PaymentSystem.Shared.deps.json
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\bin\Release\net9.0\PaymentSystem.Shared.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\bin\Release\net9.0\PaymentSystem.Shared.pdb
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.csproj.AssemblyReference.cache
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.AssemblyInfoInputs.cache
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.AssemblyInfo.cs
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.csproj.CoreCompileInputs.cache
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\refint\PaymentSystem.Shared.dll
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\PaymentSystem.Shared.pdb
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Shared\obj\Release\net9.0\ref\PaymentSystem.Shared.dll

@@ -1,0 +1,4 @@
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Api\wwwroot\Logs\AuditLogs.txt
+C:\Users\kurtu\OneDrive\Masaüstü\Projects\PaymentSystem\PaymentSystem.Api\wwwroot\Logs\SerilogLogs.txt
+wwwroot\Logs\AuditLogs.txt
+wwwroot\Logs\SerilogLogs.txt

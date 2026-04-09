@@ -1,0 +1,54 @@
+@model PaymentSystem.Shared.Dtos.AuthDtos.LoginConfirmCodeDto
+@{
+    ViewData["Title"] = "2FA Verification";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PaymentSystem</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth-layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-branding">
+            <div class="branding-content">
+                <i class="fas fa-shield-alt"></i>
+                <h1>2FA Verification</h1>
+                <p>Enter the 6-digit code sent to your email</p>
+                <ul class="features-list">
+                    <li><i class="fas fa-envelope"></i> Check your inbox</li>
+                    <li><i class="fas fa-clock"></i> Code expires in 10 minutes</li>
+                    <li><i class="fas fa-lock"></i> Never share your code</li>
+                </ul>
+            </div>
+        </div>
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <div class="auth-header">
+                    <h2>Enter Verification Code</h2>
+                    <p>We sent a code to <strong>@ViewBag.Email</strong></p>
+                </div>
+                @if (TempData["Error"] != null) { <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i><span>@TempData["Error"]</span></div> }
+                <form asp-controller="Account" asp-action="VerifyCode" method="post" class="auth-form" id="verifyForm">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="Email" value="@ViewBag.Email" />
+                    <div class="form-group">
+                        <label asp-for="LoginConfirmCode"><i class="fas fa-key"></i> 6-Digit Code</label>
+                        <input type="text" asp-for="LoginConfirmCode" class="form-control text-center" maxlength="6" placeholder="000000" required autofocus pattern="[0-9]{6}" />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-check"></i> Verify Code</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Back to <a asp-controller="Account" asp-action="Login" class="auth-link">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/auth.js" asp-append-version="true"></script>
+</body>
+</html>

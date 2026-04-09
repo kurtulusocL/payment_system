@@ -1,0 +1,47 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Inactive Users";
+    Layout = "_AdminLayout";
+}
+<div class="user-list-page">
+    <div class="page-header"><div><h1><i class="fas fa-user-slash"></i> Inactive Users</h1><p>Inactive user accounts</p></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="User" asp-action="GetAllUsers" class="btn btn-outline-secondary"><i class="fas fa-users"></i> All</a>
+        <a asp-controller="User" asp-action="GetAllActiveUsers" class="btn btn-outline-secondary"><i class="fas fa-user-check"></i> Active</a>
+        <a asp-controller="User" asp-action="GetAllInactiveUsers" class="btn btn-primary active-filter"><i class="fas fa-user-slash"></i> Inactive</a>
+        <a asp-controller="User" asp-action="GetAllDeletedUsers" class="btn btn-outline-secondary"><i class="fas fa-user-times"></i> Deleted</a>
+        <a asp-controller="User" asp-action="GetAllUsersForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No inactive users found</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="user-table">
+                    <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th><input type="text" class="column-search" placeholder="Search name..." /></th><th><input type="text" class="column-search" placeholder="Search email..." /></th><th><input type="text" class="column-search" placeholder="Search phone..." /></th><th></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var user in Model) {
+                            <tr><td>@i</td><td><strong>@user.NameSurname</strong></td><td>@user.Email</td><td>@user.PhoneNumber</td><td><span class="status-badge status-inactive">Inactive</span></td>
+                            <td class="actions-cell">
+                                <a asp-controller="User" asp-action="GetUserById" asp-route-id="@user.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <form asp-controller="User" asp-action="SetActive" asp-route-id="@user.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form>
+                                @if (user.IsDeleted == false) { <form asp-controller="User" asp-action="SoftDelete" asp-route-id="@user.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form> }
+                                else { <form asp-controller="User" asp-action="Restore" asp-route-id="@user.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form> }
+                            </td></tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#user-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[1,'asc']], "columnDefs":[{"orderable":false,"targets":[5]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([1,2,3].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+        });
+    </script>
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "PaymentSystem.Api\\PaymentSystem.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "PaymentSystem.WebUI\\PaymentSystem.WebUI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "docker-compose.dcproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

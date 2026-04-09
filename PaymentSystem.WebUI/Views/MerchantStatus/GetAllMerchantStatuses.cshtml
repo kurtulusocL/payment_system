@@ -1,0 +1,106 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Merchant Statuses";
+    Layout = "_AdminLayout";
+}
+
+<div class="merchant-status-list-page">
+    <div class="page-header">
+        <div class="flex-between">
+            <div><h1><i class="fas fa-info-circle"></i> Merchant Statuses</h1><p>Manage merchant status definitions</p></div>
+            <div>
+                <a asp-controller="MerchantStatus" asp-action="CreateMerchantStatus" class="btn btn-primary"><i class="fas fa-plus"></i> New Status</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-links mb-3">
+        <a asp-controller="MerchantStatus" asp-action="GetAllMerchantStatuses" class="btn btn-primary active-filter"><i class="fas fa-list"></i> Active</a>
+        <a asp-controller="MerchantStatus" asp-action="GetAllMerchantStatusesByMerchants" class="btn btn-outline-secondary"><i class="fas fa-store"></i> By Merchants</a>
+        <a asp-controller="MerchantStatus" asp-action="GetAllMerchantStatusesForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="empty-state"><i class="fas fa-inbox"></i><p>No merchant statuses found</p></div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="data-table" id="merchant-status-table">
+                        <thead>
+                            <tr><th>#</th><th>Name</th><th>Merchant Count</th><th>Status</th><th>Actions</th></tr>
+                        </thead>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th><input type="text" class="column-search" placeholder="Search name..." /></th>
+                                <th></th>
+                                <th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i = 1; }
+                            @foreach (var status in Model)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td><strong>@status.Name</strong></td>
+                                    <td>@status.MerchantCount</td>
+                                    <td>@(status.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                                    <td class="actions-cell">
+                                        <a asp-controller="MerchantStatus" asp-action="GetMerchantStatusById" asp-route-id="@status.Id" class="btn btn-sm btn-info" title="Details"><i class="fas fa-eye"></i></a>
+                                        <a asp-controller="MerchantStatus" asp-action="GetMerchantStatusForEdit" asp-route-id="@status.Id" class="btn btn-sm btn-warning" title="Edit"><i class="fas fa-edit"></i></a>
+                                        @if (status.IsActive == false)
+                                        {
+                                            <form asp-controller="MerchantStatus" asp-action="SetActive" asp-route-id="@status.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" title="Set Active" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form>
+                                        }
+                                        else
+                                        {
+                                            <form asp-controller="MerchantStatus" asp-action="SetInactive" asp-route-id="@status.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning" title="Set Inactive" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i></button></form>
+                                        }
+                                        @if (status.IsDeleted == false)
+                                        {
+                                            <form asp-controller="MerchantStatus" asp-action="SoftDelete" asp-route-id="@status.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" title="Soft Delete" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form>
+                                        }
+                                        else
+                                        {
+                                            <form asp-controller="MerchantStatus" asp-action="Restore" asp-route-id="@status.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" title="Restore" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form>
+                                        }
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var table = $('#merchant-status-table').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json" },
+                "pageLength": 50,
+                "lengthMenu": [[25, 50, 100, 250, -1], [25, 50, 100, 250, "All"]],
+                "order": [[1, 'asc']],
+                "columnDefs": [{ "orderable": false, "targets": [4] }],
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">'
+            });
+            table.columns().every(function() {
+                var that = this;
+                if ([1, 3].includes(this.index())) {
+                    $('.column-search').eq(this.index()).on('keyup change', function() {
+                        if (that.search() !== this.value) { that.search(this.value, false, true).draw(); }
+                    });
+                }
+            });
+        });
+    </script>
+}

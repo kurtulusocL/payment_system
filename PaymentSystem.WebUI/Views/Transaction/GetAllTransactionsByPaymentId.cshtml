@@ -1,0 +1,50 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Transactions By Payment";
+    Layout = "_AdminLayout";
+}
+<div class="transaction-list-page">
+    <div class="page-header"><div><h1><i class="fas fa-credit-card"></i> Transactions By Payment</h1><p>Transactions filtered by payment</p></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="Transaction" asp-action="GetAllTransactions" class="btn btn-outline-secondary"><i class="fas fa-list"></i> Active</a>
+        <a asp-controller="Transaction" asp-action="GetAllTransactionsByWalletId" class="btn btn-outline-secondary"><i class="fas fa-wallet"></i> By Wallet</a>
+        <a asp-controller="Transaction" asp-action="GetAllTransactionsByPaymentId" class="btn btn-primary active-filter"><i class="fas fa-credit-card"></i> By Payment</a>
+        <a asp-controller="Transaction" asp-action="GetAllTransactionsByCurrencyId" class="btn btn-outline-secondary"><i class="fas fa-coins"></i> By Currency</a>
+        <a asp-controller="Transaction" asp-action="GetAllTransactionsByTransactionTypeId" class="btn btn-outline-secondary"><i class="fas fa-tag"></i> By Type</a>
+        <a asp-controller="Transaction" asp-action="GetAllTransactionsForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No transactions found</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="transaction-table">
+                    <thead><tr><th>#</th><th>Amount</th><th>Reference</th><th>Wallet</th><th>Type</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th><input type="text" class="column-search" placeholder="Search amount..." /></th><th><input type="text" class="column-search" placeholder="Search ref..." /></th><th><input type="text" class="column-search" placeholder="Search wallet..." /></th><th><input type="text" class="column-search" placeholder="Search type..." /></th><th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var t in Model) {
+                            <tr><td>@i</td><td><strong>$@t.Amount</strong></td><td><code>@t.Reference</code></td><td>@t.WalletId</td><td>@t.TransactionTypeName</td><td>@(t.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                            <td class="actions-cell">
+                                <a asp-controller="Transaction" asp-action="GetTransactionById" asp-route-id="@t.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <a asp-controller="Transaction" asp-action="GetTransactionForEdit" asp-route-id="@t.Id" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                @if (t.IsActive == false) { <form asp-controller="Transaction" asp-action="SetActive" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i></button></form> }
+                                else { <form asp-controller="Transaction" asp-action="SetInactive" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-ban"></i></button></form> }
+                                @if (t.IsDeleted == false) { <form asp-controller="Transaction" asp-action="SoftDelete" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></form> }
+                                else { <form asp-controller="Transaction" asp-action="Restore" asp-route-id="@t.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-undo"></i></button></form> }
+                            </td></tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#transaction-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[1,'desc']], "columnDefs":[{"orderable":false,"targets":[6]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([1,2,3,4,5].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+        });
+    </script>
+}

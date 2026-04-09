@@ -1,0 +1,18 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Create Transaction";
+    Layout = "_AdminLayout";
+}
+<div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-plus-circle"></i> Create Transaction</h1><p>Add a new transaction</p></div><a asp-controller="Transaction" asp-action="GetAllTransactions" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a></div></div>
+<div class="card"><div class="card-body">
+    <form asp-controller="Transaction" asp-action="CreateTransaction" method="post">
+        @Html.AntiForgeryToken()
+        <div class="form-group"><label for="Amount">Amount</label><input type="number" id="Amount" name="Amount" class="form-control" placeholder="e.g., 50.00" step="0.01" required /></div>
+        <div class="form-group"><label for="Reference">Reference</label><input type="text" id="Reference" name="Reference" class="form-control" placeholder="Transaction reference" /></div>
+        <div class="form-group"><label for="WalletId">Wallet ID</label><input type="number" id="WalletId" name="WalletId" class="form-control" placeholder="Wallet ID" required /></div>
+        <div class="form-group"><label for="PaymentId">Payment ID</label><input type="number" id="PaymentId" name="PaymentId" class="form-control" placeholder="Payment ID (optional)" /></div>
+        <div class="form-group"><label for="CurrencyId">Currency ID</label><input type="number" id="CurrencyId" name="CurrencyId" class="form-control" placeholder="Currency ID" required /></div>
+        <div class="form-group"><label for="TransactionTypeId">Transaction Type ID</label><input type="number" id="TransactionTypeId" name="TransactionTypeId" class="form-control" placeholder="Type ID" required /></div>
+        <div class="form-actions"><button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create</button><a asp-controller="Transaction" asp-action="GetAllTransactions" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a></div>
+    </form>
+</div></div>

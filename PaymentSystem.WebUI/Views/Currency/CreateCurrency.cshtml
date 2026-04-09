@@ -1,0 +1,58 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Create Currency";
+    Layout = "_AdminLayout";
+}
+
+<div class="currency-create-page">
+    <div class="page-header">
+        <div class="flex-between">
+            <div>
+                <h1><i class="fas fa-plus-circle"></i> Create Currency</h1>
+                <p>Add a new currency to the system</p>
+            </div>
+            <div>
+                <a asp-controller="Currency" asp-action="GetAllCurrencies" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form asp-controller="Currency" asp-action="CreateCurrency" method="post" class="form-horizontal">
+                @Html.AntiForgeryToken()
+                
+                <div class="form-group">
+                    <label for="Name"><i class="fas fa-font"></i> Name</label>
+                    <input type="text" id="Name" name="Name" class="form-control" placeholder="e.g., US Dollar" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="Code"><i class="fas fa-barcode"></i> Code</label>
+                    <input type="text" id="Code" name="Code" class="form-control" placeholder="e.g., USD" required maxlength="3" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Symbol"><i class="fas fa-asterisk"></i> Symbol</label>
+                    <input type="text" id="Symbol" name="Symbol" class="form-control" placeholder="e.g., $" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Description"><i class="fas fa-align-left"></i> Description</label>
+                    <textarea id="Description" name="Description" class="form-control" placeholder="Optional description" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Create Currency
+                    </button>
+                    <a asp-controller="Currency" asp-action="GetAllCurrencies" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

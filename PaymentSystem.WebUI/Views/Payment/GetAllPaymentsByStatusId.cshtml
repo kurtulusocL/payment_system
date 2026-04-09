@@ -1,0 +1,51 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Payments By Status";
+    Layout = "_AdminLayout";
+    var statusId = ViewBag.StatusId as int?;
+}
+<div class="payment-list-page">
+    <div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-tag"></i> Payments By Status</h1><p>Status ID: @statusId</p></div><div><a asp-controller="Payment" asp-action="CreatePayment" class="btn btn-primary"><i class="fas fa-plus"></i> New Payment</a></div></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="Payment" asp-action="GetAllPayments" class="btn btn-outline-secondary"><i class="fas fa-list"></i> Active</a>
+        <a asp-controller="Payment" asp-action="GetAllPaymentsByUserId" class="btn btn-outline-secondary"><i class="fas fa-user"></i> By User</a>
+        <a asp-controller="Payment" asp-action="GetAllPaymentsByStatusId" class="btn btn-primary active-filter"><i class="fas fa-tag"></i> By Status</a>
+        <a asp-controller="Payment" asp-action="GetAllPaymentsByCurrencyId" class="btn btn-outline-secondary"><i class="fas fa-coins"></i> By Currency</a>
+        <a asp-controller="Payment" asp-action="GetAllPaymentsByMerchantId" class="btn btn-outline-secondary"><i class="fas fa-store"></i> By Merchant</a>
+        <a asp-controller="Payment" asp-action="GetAllPaymentsForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No payments found for this status</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="payment-table">
+                    <thead><tr><th>#</th><th>Amount</th><th>Card Number</th><th>User</th><th>Merchant</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th><input type="text" class="column-search" placeholder="Search amount..." /></th><th><input type="text" class="column-search" placeholder="Search card..." /></th><th><input type="text" class="column-search" placeholder="Search user..." /></th><th><input type="text" class="column-search" placeholder="Search merchant..." /></th><th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var p in Model) {
+                            <tr><td>@i</td><td><strong>$@p.Amount</strong></td><td><code>@p.MaskedCardNumber</code></td><td>@p.UserEmail</td><td>@p.MerchantName</td><td>@(p.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                            <td class="actions-cell">
+                                <a asp-controller="Payment" asp-action="GetPaymentById" asp-route-id="@p.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <a asp-controller="Payment" asp-action="GetPaymentForEdit" asp-route-id="@p.Id" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                @if (p.IsActive == false) { <form asp-controller="Payment" asp-action="SetActive" asp-route-id="@p.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form> }
+                                else { <form asp-controller="Payment" asp-action="SetInactive" asp-route-id="@p.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i></button></form> }
+                                @if (p.IsDeleted == false) { <form asp-controller="Payment" asp-action="SoftDelete" asp-route-id="@p.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form> }
+                                else { <form asp-controller="Payment" asp-action="Restore" asp-route-id="@p.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form> }
+                            </td></tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#payment-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[1,'desc']], "columnDefs":[{"orderable":false,"targets":[6]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([1,2,3,4,5].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+        });
+    </script>
+}

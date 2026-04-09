@@ -1,0 +1,49 @@
+@model List<dynamic>
+@{
+    ViewData["Title"] = "Merchants With No Task Number";
+    Layout = "_AdminLayout";
+}
+<div class="merchant-list-page">
+    <div class="page-header"><div class="flex-between"><div><h1><i class="fas fa-tasks"></i> Merchants With No Task Number</h1><p>Merchants without task numbers assigned</p></div><div><a asp-controller="Merchant" asp-action="CreateMerchant" class="btn btn-primary"><i class="fas fa-plus"></i> New Merchant</a></div></div></div>
+    <div class="filter-links mb-3">
+        <a asp-controller="Merchant" asp-action="GetAllMerchants" class="btn btn-outline-secondary"><i class="fas fa-store"></i> Active</a>
+        <a asp-controller="Merchant" asp-action="GetAllMerchantsByStatusId" class="btn btn-outline-secondary"><i class="fas fa-tag"></i> By Status</a>
+        <a asp-controller="Merchant" asp-action="GetAllMerchantsByNullTaskNumber" class="btn btn-primary active-filter"><i class="fas fa-tasks"></i> No Task Number</a>
+        <a asp-controller="Merchant" asp-action="GetAllMerchantsByPayment" class="btn btn-outline-secondary"><i class="fas fa-credit-card"></i> By Payment</a>
+        <a asp-controller="Merchant" asp-action="GetAllMerchantsForAdmin" class="btn btn-outline-secondary"><i class="fas fa-shield-alt"></i> All (Admin)</a>
+    </div>
+    <div class="card"><div class="card-body">
+        @if (Model == null || Model.Count == 0) { <div class="empty-state"><i class="fas fa-inbox"></i><p>No merchants without task numbers</p></div> }
+        else {
+            <div class="table-responsive">
+                <table class="data-table" id="merchant-table">
+                    <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Tax Number</th><th>Status</th><th>Actions</th></tr></thead>
+                    <thead><tr><th></th><th><input type="text" class="column-search" placeholder="Search name..." /></th><th><input type="text" class="column-search" placeholder="Search email..." /></th><th><input type="text" class="column-search" placeholder="Search phone..." /></th><th><input type="text" class="column-search" placeholder="Search tax..." /></th><th><select class="column-search"><option value="">All</option><option value="Active">Active</option><option value="Inactive">Inactive</option></select></th><th></th></tr></thead>
+                    <tbody>
+                        @{ int i = 1; }
+                        @foreach (var m in Model) {
+                            <tr><td>@i</td><td><strong>@m.Name</strong></td><td>@m.Email</td><td>@m.PhoneNumber</td><td>@m.TaxNumber</td><td>@(m.IsActive == true ? "<span class='status-badge status-active'>Active</span>" : "<span class='status-badge status-inactive'>Inactive</span>")</td>
+                            <td class="actions-cell">
+                                <a asp-controller="Merchant" asp-action="GetMerchantById" asp-route-id="@m.Id" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></a>
+                                <a asp-controller="Merchant" asp-action="GetMerchantForEdit" asp-route-id="@m.Id" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                @if (m.IsActive == false) { <form asp-controller="Merchant" asp-action="SetActive" asp-route-id="@m.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Set active?')"><i class="fas fa-check"></i></button></form> }
+                                else { <form asp-controller="Merchant" asp-action="SetInactive" asp-route-id="@m.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Set inactive?')"><i class="fas fa-ban"></i></button></form> }
+                                @if (m.IsDeleted == false) { <form asp-controller="Merchant" asp-action="SoftDelete" asp-route-id="@m.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Soft delete?')"><i class="fas fa-trash"></i></button></form> }
+                                else { <form asp-controller="Merchant" asp-action="Restore" asp-route-id="@m.Id" method="post" class="inline-form"><button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Restore?')"><i class="fas fa-undo"></i></button></form> }
+                            </td></tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div></div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var t = $('#merchant-table').DataTable({"language": {"url": "//cdn.datatables.net/plug-ins/1.13.7/i18n/en-GB.json"}, "pageLength": 50, "lengthMenu": [[25,50,100,250,-1],[25,50,100,250,"All"]], "order":[[1,'asc']], "columnDefs":[{"orderable":false,"targets":[6]}], "dom": '<"top"lf>rt<"bottom"ip><"clear">'});
+            t.columns().every(function(){var th=this;if([1,2,3,4,5].includes(this.index())){$('.column-search').eq(this.index()).on('keyup change',function(){if(th.search()!==this.value){th.search(this.value,false,true).draw();}});}});
+        });
+    </script>
+}
